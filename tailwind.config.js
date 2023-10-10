@@ -4,7 +4,7 @@ module.exports = {
   theme: {
     fontFamily: {
       'ubuntu': ['Ubuntu']
-    },
+    }
   },
   plugins: [],
 }
