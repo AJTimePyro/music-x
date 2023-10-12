@@ -41,7 +41,7 @@ function NavBar() {
 
     return (
         <>
-            <nav className="sm:flex justify-between md:justify-around items-center gap-1 md:gap-3 bg-slate-900 p-4 md:pl-10 md:pr-10">
+            <nav className="sm:flex justify-between md:justify-around items-center gap-1 md:gap-3 bg-slate-900 p-4 md:pl-10 md:pr-10 select-none">
                 <div className="flex justify-between items-center gap-11 mb-1 max-[472px]:gap-2">
                     <div>
                         <h2 className="text-slate-400 text-lg md:text-2xl font-bold">
