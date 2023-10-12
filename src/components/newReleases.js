@@ -1,3 +1,5 @@
+import MusicCard from "./musicCard";
+
 function NewReleases() {
     return (
         <section>
@@ -8,7 +10,7 @@ function NewReleases() {
             </div>
 
             <div>
-                
+                <MusicCard/>
             </div>
         </section>
     )
