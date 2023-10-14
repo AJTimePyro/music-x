@@ -3,14 +3,35 @@ import { MdChevronLeft, MdChevronRight } from 'react-icons/md'
 
 function NewReleases() {
 
-    const slideLeft = () => {
+    const slide = (direction) => {
         let slider = document.getElementById("slider");
-        slider.scrollLeft = slider.scrollLeft - 500;
+        const start = slider.scrollLeft;
+        const duration = 700;
+        const target = start + (direction === "left" ? slider.clientWidth * -1 : slider.clientWidth)
+    
+        let startTime = null;
+    
+        function animateScroll(timestamp) {
+            if (!startTime) startTime = timestamp;
+            const progress = timestamp - startTime;
+            const easeProgress = Math.min(progress / duration, 1);
+            slider.scrollLeft = start + (target - start) * easeProgress;
+    
+            if (progress < duration) {
+                requestAnimationFrame(animateScroll);
+            }
+        }
+    
+        requestAnimationFrame(animateScroll);
     }
+    
 
+    const slideLeft = () => {
+        slide("left");
+    }
+    
     const slideRight = () => {
-        let slider = document.getElementById("slider");
-        slider.scrollLeft = slider.scrollLeft + 500;
+        slide("right");
     }
 
     return (
@@ -27,6 +48,9 @@ function NewReleases() {
             </div>
 
             <div id="slider" className="flex w-full h-full overflow-x-scroll scroll-smooth whitespace-nowrap no-scrollbar">
+                <MusicCard/>
+                <MusicCard/>
+                <MusicCard/>
                 <MusicCard/>
                 <MusicCard/>
                 <MusicCard/>
