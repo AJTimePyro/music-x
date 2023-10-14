@@ -67,7 +67,7 @@ function NavBar() {
 
             <div className="">
                 <ul className={
-                    `text-slate-400 text-lg md:text-2xl font-ubuntu sm:flex sm:items-center gap-1 md:gap-3 ${close_btn ? "opacity-100 transition-opacity duration-300 ease-in" : "h-0 max-sm:opacity-0"}
+                    `text-slate-400 text-lg md:text-2xl font-ubuntu sm:flex sm:items-center gap-1 md:gap-3 ${close_btn ? "" : "h-0 hidden"}
                     `}>
                     {
                         menu_links.map(
