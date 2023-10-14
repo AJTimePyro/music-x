@@ -21,12 +21,12 @@ function NewReleases() {
                 </h2>
 
                 <div className="flex text-slate-200">
-                    <MdChevronLeft size={50} onClick={slideLeft} className="cursor-pointer"/>
-                    <MdChevronRight size={50} onClick={slideRight} className="cursor-pointer"/>
+                    <MdChevronLeft size={50} onClick={slideLeft} className="cursor-pointer opacity-50 hover:opacity-100"/>
+                    <MdChevronRight size={50} onClick={slideRight} className="cursor-pointer opacity-50 hover:opacity-100"/>
                 </div>
             </div>
 
-            <div id="slider" className="flex w-full h-full overflow-x-scroll scroll-smooth whitespace-nowrap">
+            <div id="slider" className="flex w-full h-full overflow-x-scroll scroll-smooth whitespace-nowrap no-scrollbar">
                 <MusicCard/>
                 <MusicCard/>
                 <MusicCard/>
