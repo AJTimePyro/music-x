@@ -2,15 +2,41 @@ import MusicCard from "./musicCard";
 import { MdChevronLeft, MdChevronRight } from 'react-icons/md'
 
 function NewReleases() {
-
-    const slideLeft = () => {
+    
+    const slide = (direction) => {
         let slider = document.getElementById("slider");
-        slider.scrollLeft = slider.scrollLeft - 500;
+        const start = slider.scrollLeft;
+        let target;
+        if (direction === "left") {
+            target = start - slider.clientWidth;
+        }
+        else {
+            target = start + slider.clientWidth;
+        }
+        const duration = 1000;
+
+        let startTime = null;
+
+        function animateScroll(timestamp) {
+            if (!startTime) startTime = timestamp;
+            const progress = timestamp - startTime;
+            const easeProgress = Math.min(progress / duration, 1);
+            slider.scrollLeft = start + (target - start) * easeProgress;
+
+            if (progress < duration) {
+                requestAnimationFrame(animateScroll);
+            }
+        }
+
+        requestAnimationFrame(animateScroll);
     }
 
+    const slideLeft = () => {
+        slide("left");
+    }
+    
     const slideRight = () => {
-        let slider = document.getElementById("slider");
-        slider.scrollLeft = slider.scrollLeft + 500;
+        slide("right");
     }
 
     return (
@@ -26,7 +52,10 @@ function NewReleases() {
                 </div>
             </div>
 
-            <div id="slider" className="flex w-full h-full overflow-x-scroll scroll-smooth whitespace-nowrap no-scrollbar">
+            <div id="slider" className="flex overflow-x-scroll scroll-smooth whitespace-nowrap justify-between no-scrollbar">
+                <MusicCard/>
+                <MusicCard/>
+                <MusicCard/>
                 <MusicCard/>
                 <MusicCard/>
                 <MusicCard/>
