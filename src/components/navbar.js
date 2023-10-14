@@ -6,18 +6,22 @@ import { useState } from 'react';
 function NavBar() {
     let menu_links = [
         {
+            id : 0,
             name : "Home",
             link : "/"
         },
         {
+            id : 1,
             name : "Songs",
             link : "/"
         },
         {
+            id : 2,
             name : "Artists",
             link : "/"
         },
         {
+            id : 3,
             name : "Artists",
             link : "/"
         }
@@ -68,7 +72,7 @@ function NavBar() {
                     {
                         menu_links.map(
                             (links) => (
-                                <li>
+                                <li key={links.id}>
                                     <a className="block text-center focus:bg-gray-300 focus:text-slate-700 sm:hover:rounded-2xl sm:hover:bg-gray-300 sm:hover:text-slate-700 p-1" href={links.link}>{links.name}</a>
                                 </li>
                             )
