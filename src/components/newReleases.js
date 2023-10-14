@@ -9,7 +9,13 @@ function NewReleases() {
                 </h2>
             </div>
 
-            <div>
+            <div className="flex w-full h-full overflow-x-scroll scroll-smooth whitespace-nowrap">
+                <MusicCard/>
+                <MusicCard/>
+                <MusicCard/>
+                <MusicCard/>
+                <MusicCard/>
+                <MusicCard/>
                 <MusicCard/>
             </div>
         </section>
