@@ -1,4 +1,4 @@
-const axios = require('axios');
+import axios from 'axios';
 
 class YTMusicBase {
 
@@ -8,7 +8,8 @@ class YTMusicBase {
         this.key = "AIzaSyC9XL3ZjWddXya6X74dJoCTL-WEYFDNX30"
         this.headers = {
             "Content-Type": "application/json",
-            "User-Agent": "Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:109.0) Gecko/20100101 Firefox/117.0"
+            "User-Agent": "Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:109.0) Gecko/20100101 Firefox/117.0",
+            "Access-Control-Allow-Origin" : "*"
         }
         this.payload = {
             "context": {
@@ -66,6 +67,7 @@ class YTMusicBase {
                 reqHeaders,
                 payload
             );
+            console.log(res);
             return res;
         }
 
@@ -96,4 +98,4 @@ class YTMusicBase {
     }
 }
 
-module.exports = YTMusicBase;
+export default YTMusicBase;

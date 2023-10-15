@@ -1,5 +1,6 @@
 import MusicCard from "./musicCard";
 import { MdChevronLeft, MdChevronRight } from 'react-icons/md'
+// import ytMusicNewRelease from "../yt_music/ytmusicPlaylist";
 
 function NewReleases() {
 
@@ -33,6 +34,7 @@ function NewReleases() {
     const slideRight = () => {
         slide("right");
     }
+    // const newReleasesData = new ytMusicNewRelease();
 
     return (
         <section>
@@ -48,16 +50,13 @@ function NewReleases() {
             </div>
 
             <div id="slider" className="flex w-full h-full overflow-x-scroll scroll-smooth whitespace-nowrap no-scrollbar">
-                <MusicCard/>
-                <MusicCard/>
-                <MusicCard/>
-                <MusicCard/>
-                <MusicCard/>
-                <MusicCard/>
-                <MusicCard/>
-                <MusicCard/>
-                <MusicCard/>
-                <MusicCard/>
+                {
+                    // newReleasesData.map(
+                    //     (musicData) => (
+                    //         <MusicCard thumbnail={musicData.thumbnail} title={musicData.title}/>
+                    //     )
+                    // )
+                }
             </div>
         </section>
     )

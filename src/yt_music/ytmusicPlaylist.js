@@ -125,4 +125,16 @@ class YTMusicPlaylist extends YTMusicBase {
 
 }
 
-export default YTMusicPlaylist;
+function ytMusicNewRelease() {
+    const newReleasePlaylistId = "RDCLAK5uy_ksEjgm3H_7zOJ_RHzRjN1wY-_FFcs7aAU"
+    let ytNewRe = new YTMusicPlaylist(
+        newReleasePlaylistId,
+        20
+    );
+    return ytNewRe.songsList;
+}
+
+export default {
+    YTMusicPlaylist,
+    ytMusicNewRelease
+};
