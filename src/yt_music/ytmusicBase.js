@@ -96,5 +96,4 @@ class YTMusicBase {
     }
 }
 
-export default YTMusicBase;
-// module.exports = YTMusicBase;
+module.exports = YTMusicBase;
