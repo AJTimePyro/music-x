@@ -134,7 +134,9 @@ function ytMusicNewRelease() {
     return ytNewRe.songsList;
 }
 
-export default {
-    YTMusicPlaylist,
-    ytMusicNewRelease
-};
+// export default {
+//     YTMusicPlaylist,
+//     ytMusicNewRelease
+// };
+
+export default ytMusicNewRelease;
