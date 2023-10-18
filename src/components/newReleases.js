@@ -66,7 +66,7 @@ function NewReleases() {
                     (newReleased != [{}]) ?
                         newReleased.map(
                             (musicData) => (
-                                <MusicCard key={musicData.id} thumbnail={musicData.thumbnail} title={musicData.title}/>
+                                <MusicCard className="w-1/4" key={musicData.id} thumbnail={musicData.thumbnail} title={musicData.title}/>
                             )
                         ) : ""
                 }
