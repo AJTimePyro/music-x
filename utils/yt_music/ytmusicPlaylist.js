@@ -1,4 +1,4 @@
-import YTMusicBase from './ytmusicBase';
+const YTMusicBase = require("./ytmusicBase");
 
 
 class YTMusicPlaylist extends YTMusicBase {
@@ -10,7 +10,7 @@ class YTMusicPlaylist extends YTMusicBase {
         super();
         this.playlistId = playlistId;
         this.limit = limit;
-        this.songsList = [];
+        this.songsList = {};
 
         this.payload["browseId"] = "VL" + this.playlistId;
 
@@ -57,9 +57,8 @@ class YTMusicPlaylist extends YTMusicBase {
                 tempObj["album_name"] = album[0];
                 tempObj["album_channel_id"] = album[1];
 
-                this.songsList.push(tempObj);
+                this.songsList[index] = tempObj;
             }
-            console.log(this.songsList);
         }
 
         let _parseThumbnail = (musicData) => {
@@ -111,7 +110,6 @@ class YTMusicPlaylist extends YTMusicBase {
             let albumName = null;
             let albumId = null;
             if (Object.keys(musicRLIFCRText).length !== 0) {
-                console.log(musicRLIFCRText);
                 const musicR0 = _getMR0(musicRLIFCRText);
                 albumName = musicR0["text"]
                 albumId = musicR0["navigationEndpoint"]["browseEndpoint"]["browseId"]
@@ -120,23 +118,28 @@ class YTMusicPlaylist extends YTMusicBase {
             return [albumName, albumId];
         }
 
-        _playlistData();
+        this.extraction = async () => {
+            await _playlistData();
+        }
+    }
+
+    async start() {
+        await this.extraction();
     }
 
 }
 
-function ytMusicNewRelease() {
+async function ytMusicNewRelease(limit) {
     const newReleasePlaylistId = "RDCLAK5uy_ksEjgm3H_7zOJ_RHzRjN1wY-_FFcs7aAU"
     let ytNewRe = new YTMusicPlaylist(
         newReleasePlaylistId,
-        20
+        limit
     );
+    await ytNewRe.start();
     return ytNewRe.songsList;
 }
 
-// export default {
-//     YTMusicPlaylist,
-//     ytMusicNewRelease
-// };
-
-export default ytMusicNewRelease;
+module.exports = {
+    YTMusicPlaylist,
+    ytMusicNewRelease
+};

@@ -1,4 +1,4 @@
-import axios from 'axios';
+const axios = require("axios");
 
 class YTMusicBase {
 
@@ -66,7 +66,6 @@ class YTMusicBase {
                 reqHeaders,
                 payload
             );
-            console.log(res);
             return res;
         }
 
@@ -97,4 +96,4 @@ class YTMusicBase {
     }
 }
 
-export default YTMusicBase;
+module.exports = YTMusicBase;
