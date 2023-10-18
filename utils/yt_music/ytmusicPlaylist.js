@@ -10,7 +10,7 @@ class YTMusicPlaylist extends YTMusicBase {
         super();
         this.playlistId = playlistId;
         this.limit = limit;
-        this.songsList = {};
+        this.songsList = [];
 
         this.payload["browseId"] = "VL" + this.playlistId;
 
@@ -57,7 +57,10 @@ class YTMusicPlaylist extends YTMusicBase {
                 tempObj["album_name"] = album[0];
                 tempObj["album_channel_id"] = album[1];
 
-                this.songsList[index] = tempObj;
+                tempObj["id"] = parseInt(index);
+
+                // this.songsList[index] = tempObj;
+                this.songsList.push(tempObj);
             }
         }
 

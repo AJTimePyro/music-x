@@ -5,7 +5,7 @@ const app = express();
 const port = 5000;
 
 // routing
-app.post('/new-release', async (req, res) => {
+app.get('/new-release', async (req, res) => {
     const query = req.query;
     const limit = query.limit && !isNaN(query.limit) ? parseInt(query.limit) : Number.MAX_SAFE_INTEGER;
 

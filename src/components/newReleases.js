@@ -1,8 +1,21 @@
 import MusicCard from "./musicCard";
 import { MdChevronLeft, MdChevronRight } from "react-icons/md";
-import ytMusicNewRelease from "../yt_music/ytmusicPlaylist";
+import { useEffect, useState } from "react";
 
 function NewReleases() {
+
+    const [newReleased, setNewReleased] = useState([{}]);
+
+    useEffect(
+        () => {
+            fetch("new-release?limit=20").then(
+                response => response.json()
+            ).then(
+                data => setNewReleased(data)
+            )
+        },
+        []
+    )
 
     const slide = (direction) => {
         let slider = document.getElementById("slider");
@@ -34,7 +47,6 @@ function NewReleases() {
     const slideRight = () => {
         slide("right");
     }
-    const newReleasesData = ytMusicNewRelease();
 
     return (
         <section>
@@ -51,11 +63,12 @@ function NewReleases() {
 
             <div id="slider" className="flex w-full h-full overflow-x-scroll scroll-smooth whitespace-nowrap no-scrollbar">
                 {
-                    newReleasesData.map(
-                        (musicData) => (
-                            <MusicCard thumbnail={musicData.thumbnail} title={musicData.title}/>
-                        )
-                    )
+                    (newReleased != [{}]) ?
+                        newReleased.map(
+                            (musicData) => (
+                                <MusicCard key={musicData.id} thumbnail={musicData.thumbnail} title={musicData.title}/>
+                            )
+                        ) : ""
                 }
             </div>
         </section>
