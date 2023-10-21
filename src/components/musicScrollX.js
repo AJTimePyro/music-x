@@ -2,16 +2,16 @@ import MusicCard from "./musicCard";
 import { MdChevronLeft, MdChevronRight } from "react-icons/md";
 import { useEffect, useState } from "react";
 
-function NewReleases() {
+function MusicScrollX(scrollXData) {
 
-    const [newReleased, setNewReleased] = useState([{}]);
+    const [songList, setSongList] = useState([{}]);
 
     useEffect(
         () => {
-            fetch("new-release?limit=20").then(
+            fetch(scrollXData.url).then(
                 response => response.json()
             ).then(
-                data => setNewReleased(data)
+                data => setSongList(data)
             )
         },
         []
@@ -52,7 +52,7 @@ function NewReleases() {
         <section>
             <div className="p-4 max-md:p-2 max-sm:p-1 flex justify-between">
                 <h2 className="text-slate-100 font-bold text-3xl">
-                    New Releases
+                    {scrollXData.title}
                 </h2>
 
                 <div className="flex text-slate-200">
@@ -63,8 +63,8 @@ function NewReleases() {
 
             <div id="slider" className="flex w-full h-full overflow-x-scroll scroll-smooth whitespace-nowrap no-scrollbar">
                 {
-                    (newReleased != [{}]) ?
-                        newReleased.map(
+                    (songList != [{}]) ?
+                        songList.map(
                             (musicData) => (
                                 <MusicCard className="" key={musicData.id} thumbnail={musicData.thumbnail} title={musicData.title}/>
                             )
@@ -75,4 +75,4 @@ function NewReleases() {
     )
 }
 
-export default NewReleases;
+export default MusicScrollX;
