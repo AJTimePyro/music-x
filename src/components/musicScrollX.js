@@ -18,7 +18,7 @@ function MusicScrollX(scrollXData) {
     )
 
     const slide = (direction) => {
-        let slider = document.getElementById("slider");
+        let slider = document.getElementById(scrollXData.scrollId);
         const start = slider.scrollLeft;
         const duration = 700;
         const target = start + (direction === "left" ? slider.clientWidth * -1 : slider.clientWidth)
@@ -49,7 +49,7 @@ function MusicScrollX(scrollXData) {
     }
 
     return (
-        <section>
+        <section className="mb-8">
             <div className="p-4 max-md:p-2 max-sm:p-1 flex justify-between">
                 <h2 className="text-slate-100 font-bold text-3xl">
                     {scrollXData.title}
@@ -61,7 +61,7 @@ function MusicScrollX(scrollXData) {
                 </div>
             </div>
 
-            <div id="slider" className="flex w-full h-full overflow-x-scroll scroll-smooth whitespace-nowrap no-scrollbar">
+            <div id={scrollXData.scrollId} className="flex w-full h-full overflow-x-scroll scroll-smooth whitespace-nowrap no-scrollbar">
                 {
                     (songList != [{}]) ?
                         songList.map(

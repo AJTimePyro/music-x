@@ -1,5 +1,9 @@
 const YTMusicBase = require("./ytmusicBase");
 
+const specialPlaylist = {
+    "newRelease" : "RDCLAK5uy_ksEjgm3H_7zOJ_RHzRjN1wY-_FFcs7aAU",
+    "trending" : "PL_yIBWagYVjwYmv3PlwYk0b4vmaaHX6aL"
+}
 
 class YTMusicPlaylist extends YTMusicBase {
 
@@ -43,7 +47,7 @@ class YTMusicPlaylist extends YTMusicBase {
                 tempObj["thumbnail"] = _parseThumbnail(musicData);
                 
                 // Music ID and Title parsing
-                const idTitle = _parseMusicIdTitle(musicFlexCol);
+                const idTitle = _parseMusicIdTitle(musicFlexCol, tempObj);
                 tempObj["music_id"] = idTitle[0];
                 tempObj["title"] = idTitle[1];
                 
@@ -59,7 +63,6 @@ class YTMusicPlaylist extends YTMusicBase {
 
                 tempObj["id"] = parseInt(index);
 
-                // this.songsList[index] = tempObj;
                 this.songsList.push(tempObj);
             }
         }
@@ -79,12 +82,19 @@ class YTMusicPlaylist extends YTMusicBase {
             return maxThumbnail.url;              
         }
 
-        let _parseMusicIdTitle = (musicFlexCol) => {
+        let _parseMusicIdTitle = (musicFlexCol, tempObj) => {
             const musicRLIFCRText = _getMRLIFCRText(musicFlexCol[0]);
             const musicR0 = _getMR0(musicRLIFCRText);
-
             const title = musicR0["text"];
-            const musicId = musicR0["navigationEndpoint"]["watchEndpoint"]["videoId"];
+
+            let musicId;
+            if (("navigationEndpoint" in musicR0)) {
+                musicId = musicR0["navigationEndpoint"]["watchEndpoint"]["videoId"];
+            }
+            else {
+                const thumbnail = tempObj["thumbnail"];
+                musicId = thumbnail.match(/\/vi\/([^/]+)\//)[1];
+            }
 
             return [musicId, title];
         }
@@ -132,17 +142,28 @@ class YTMusicPlaylist extends YTMusicBase {
 
 }
 
-async function ytMusicNewRelease(limit) {
-    const newReleasePlaylistId = "RDCLAK5uy_ksEjgm3H_7zOJ_RHzRjN1wY-_FFcs7aAU"
+async function getYTPlaylistInfo(
+    playlistId,
+    limit
+) {
     let ytNewRe = new YTMusicPlaylist(
-        newReleasePlaylistId,
+        playlistId,
         limit
     );
     await ytNewRe.start();
     return ytNewRe.songsList;
 }
 
+async function getYTMusicList(
+    limit,
+    type
+) {
+    const playlistId = specialPlaylist[type];
+    const songData = await getYTPlaylistInfo(playlistId, limit);
+    return songData;
+}
+
 module.exports = {
     YTMusicPlaylist,
-    ytMusicNewRelease
+    getYTMusicList
 };
