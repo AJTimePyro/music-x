@@ -50,7 +50,7 @@ function NewReleases() {
 
     return (
         <section>
-            <div className="p-4 flex justify-between">
+            <div className="p-4 max-md:p-2 max-sm:p-1 flex justify-between">
                 <h2 className="text-slate-100 font-bold text-3xl">
                     New Releases
                 </h2>
@@ -66,7 +66,7 @@ function NewReleases() {
                     (newReleased != [{}]) ?
                         newReleased.map(
                             (musicData) => (
-                                <MusicCard className="w-1/4" key={musicData.id} thumbnail={musicData.thumbnail} title={musicData.title}/>
+                                <MusicCard className="" key={musicData.id} thumbnail={musicData.thumbnail} title={musicData.title}/>
                             )
                         ) : ""
                 }
