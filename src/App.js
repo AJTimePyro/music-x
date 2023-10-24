@@ -1,5 +1,5 @@
-import NavBar from './components/navbar'
-import HomeBody from './components/homeContent'
+import NavBar from './components/pageComponent/navbar'
+import HomeBody from './components/pageComponent/homeContent'
 
 function App() {
   return (

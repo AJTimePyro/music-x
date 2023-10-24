@@ -1,4 +1,4 @@
-import MusicCard from "./musicCard";
+import MusicCard from "../componentUtility/musicCard";
 import { MdChevronLeft, MdChevronRight } from "react-icons/md";
 import { useEffect, useState } from "react";
 
