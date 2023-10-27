@@ -3,11 +3,11 @@ import musicPlayContext from "./playContext";
 
 const MusicPlayState = (props) => {
     const state = {
-        "isActive" : false,
+        "isActive" : true,
         "isPlaying" : false,
         "currentPlayingId" : null,
         "currentPlayIndex" : null,
-        "musicList" : []
+        "musicQueue" : []
     }
 
     const [playInfo, setPlayInfo] = useState(state);
@@ -22,8 +22,23 @@ const MusicPlayState = (props) => {
         setPlayInfo(updateKeyValue("isActive", newVal));
     }
 
+    const updateIsPlaying = (newVal) => {
+        setPlayInfo(updateKeyValue("isPlaying", newVal));
+    }
+    
+    const newMusicQueue = (newList) => {
+        setPlayInfo(updateKeyValue("musicQueue", newList));
+    }
+
     return (            
-        <musicPlayContext.Provider value={{state, updateIsActive}}>
+        <musicPlayContext.Provider value={
+            {
+                state,
+                updateIsActive,
+                updateIsPlaying,
+                newMusicQueue
+            }
+        }>
             {props.children}
         </musicPlayContext.Provider>
     )

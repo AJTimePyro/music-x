@@ -3,9 +3,7 @@ import PlayPauseMCBtn from "./playPauseMCBtn";
 
 function MusicCard(
     {
-        musicData,
-        nextMusicId,
-        prevMusicId
+        musicData
     }
 ) {
 
