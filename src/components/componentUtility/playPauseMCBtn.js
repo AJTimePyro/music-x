@@ -1,24 +1,25 @@
 import { FaPlay, FaPause } from "react-icons/fa6";
+import { useContext } from "react";
+import musicPlayContext from "../../context/musicPlayInfo/playContext";
 
 const PlayPauseMCBtn = (
     {
         isHover,
-        isActive,
-        isPlaying
+        musicId
     }
 ) => {
+
+    const playInfoContext = useContext(musicPlayContext);
     
     const playBtn = () => <FaPlay className="text-white absolute top-1/2 left-1/2"/>
     const pauseBtn = () => <FaPause className="text-white absolute top-1/2 left-1/2"/>
 
-    if (isActive) {
-        if (isPlaying) return pauseBtn();
-        else return playBtn();
+    if (playInfoContext.state.isActive && musicId === playInfoContext.state.currentPlayingId) {
+        if (playInfoContext.state.isPlaying) return pauseBtn();
+        else playBtn();
     }
-
-    if (isHover) {
-        return playBtn();
-    }
+    else if (isHover) return playBtn();
+    return <></>;
 
 }
 
