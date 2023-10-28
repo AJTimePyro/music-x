@@ -2,20 +2,21 @@ import { useState } from "react";
 import musicPlayContext from "./playContext";
 
 const MusicPlayState = (props) => {
-    const state = {
-        "isActive" : true,
+    const playInfo = {
+        "isActive" : false,
         "isPlaying" : false,
         "currentPlayingId" : null,
         "currentPlayIndex" : null,
         "musicQueue" : []
     }
 
-    const [playInfo, setPlayInfo] = useState(state);
+    const [state, setPlayInfo] = useState(playInfo);
 
     const updateKeyValue = (key, newVal) => {
-        const copyInfo = playInfo;
-        copyInfo[key] = newVal;
-        return copyInfo;
+        return {
+            ...state,
+            [key] : newVal
+        };
     }
 
     const updateIsActive = (newVal) => {
