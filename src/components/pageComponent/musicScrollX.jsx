@@ -65,7 +65,7 @@ function MusicScrollX(scrollXData) {
                 {
                     (songList != [{}]) ?
                         songList.map(
-                            (musicData, index) => (
+                            (musicData) => (
                                 <MusicCard
                                 key={musicData.music_id}
                                 musicData={musicData}

@@ -30,7 +30,7 @@ function MusicCard(
 
     return (
         <div id={musicData.music_id} className="flex flex-col p-4 m-4 max-md:p-2 max-md:m-3 shadow shadow-slate-500 rounded-md items-center">
-            <div className="hover:scale-105 active:scale-105 duration-500 cursor-pointer" onMouseEnter={mouseEnteredCard} onMouseLeave={mouseLeftCard} onClick={playMusic}>
+            <div className="hover:scale-105 active:scale-105 duration-500 cursor-pointer relative" onMouseEnter={mouseEnteredCard} onMouseLeave={mouseLeftCard} onClick={playMusic}>
                 <img className="hover:brightness-75 h-[calc(100vw/6)] max-md:h-52 max-sm:h-36" src={musicData.thumbnail} alt=""/>
                 <PlayPauseMCBtn isHover={isMouseOnCard} musicIndex={musicIndex}/>
             </div>
