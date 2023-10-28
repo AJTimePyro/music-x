@@ -70,7 +70,6 @@ function MusicScrollX(scrollXData) {
                                 key={musicData.music_id}
                                 musicData={musicData}
                                 musicList={songList}
-                                songIndex={index}
                                 />
                             )
                         ) : ""

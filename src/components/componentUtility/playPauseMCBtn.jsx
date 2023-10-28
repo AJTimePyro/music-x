@@ -5,7 +5,7 @@ import musicPlayContext from "../../context/musicPlayInfo/playContext";
 const PlayPauseMCBtn = (
     {
         isHover,
-        musicId
+        musicIndex
     }
 ) => {
 
@@ -14,8 +14,8 @@ const PlayPauseMCBtn = (
     const playBtn = () => <FaPlay className="text-white absolute top-1/2 left-1/2"/>
     const pauseBtn = () => <FaPause className="text-white absolute top-1/2 left-1/2"/>
 
-    if (playInfoContext.state.isActive && musicId === playInfoContext.state.currentPlayingId) {
-        if (playInfoContext.state.isPlaying) return pauseBtn();
+    if (playInfoContext.isActive && musicIndex === playInfoContext.currentPlayIndex) {
+        if (playInfoContext.isPlaying) return pauseBtn();
         else playBtn();
     }
     else if (isHover) return playBtn();
