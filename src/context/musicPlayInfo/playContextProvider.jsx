@@ -7,6 +7,7 @@ const MusicPlayState = (props) => {
     const [isPlaying, setIsPlaying] = useState(false);
     const [currentPlayIndex, setCurrentPlayIndex] = useState(null);
     const [musicQueue, changeMusicQueue] = useState(null);
+    const [currentQueueType, setCurrentQueueType] = useState(null);
 
     return (            
         <musicPlayContext.Provider value={
@@ -15,10 +16,12 @@ const MusicPlayState = (props) => {
                 isPlaying,
                 currentPlayIndex,
                 musicQueue,
+                currentQueueType,
                 setIsActive,
                 setIsPlaying,
                 setCurrentPlayIndex,
-                changeMusicQueue
+                changeMusicQueue,
+                setCurrentQueueType
             }
         }>
             {props.children}

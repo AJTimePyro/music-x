@@ -5,7 +5,8 @@ import musicPlayContext from "../../context/musicPlayInfo/playContext";
 const PlayPauseMCBtn = (
     {
         isHover,
-        musicId
+        musicIndex,
+        listType
     }
 ) => {
 
@@ -18,7 +19,8 @@ const PlayPauseMCBtn = (
         <div className="flex items-center justify-center absolute inset-0">
             {
                 playInfoContext.isActive &&
-                musicId === playInfoContext.musicQueue[playInfoContext.currentPlayIndex].music_id ? (
+                playInfoContext.currentQueueType ===  listType &&
+                playInfoContext.currentPlayIndex === musicIndex ? (
                     playInfoContext.isPlaying ? (
                         pauseBtn()
                     ) : (

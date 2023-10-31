@@ -4,14 +4,18 @@ import { useEffect, useState } from "react";
 
 function MusicScrollX(scrollXData) {
 
-    const [songList, setSongList] = useState([{}]);
+    const [songsInfo, setSongsInfo] = useState({});
+    const [songsList, setSongsList] = useState([{}]);
 
     useEffect(
         () => {
             fetch(scrollXData.url).then(
                 response => response.json()
             ).then(
-                data => setSongList(data)
+                data => {
+                    setSongsInfo(data);
+                    setSongsList(data.song_info);
+                }
             )
         },
         []
@@ -63,13 +67,13 @@ function MusicScrollX(scrollXData) {
 
             <div id={scrollXData.scrollId} className="flex w-full h-full overflow-x-scroll scroll-smooth whitespace-nowrap no-scrollbar">
                 {
-                    (songList != [{}]) ?
-                        songList.map(
+                    (songsList != [{}]) ?
+                    songsList.map(
                             (musicData) => (
                                 <MusicCard
                                 key={musicData.music_id}
                                 musicData={musicData}
-                                musicList={songList}
+                                musicResInfo={songsInfo}
                                 />
                             )
                         ) : ""

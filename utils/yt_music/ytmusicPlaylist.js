@@ -160,7 +160,11 @@ async function getYTMusicList(
 ) {
     const playlistId = specialPlaylist[type];
     const songData = await getYTPlaylistInfo(playlistId, limit);
-    return songData;
+    let responseData = {
+        "type" : type,
+        "song_info" : songData
+    }
+    return responseData;
 }
 
 module.exports = {
