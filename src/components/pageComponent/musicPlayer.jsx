@@ -8,7 +8,8 @@ const MusicPlayer = () => {
     // const audio = new Audio("http://commondatastorage.googleapis.com/codeskulptor-demos/DDR_assets/Kangaroo_MusiQue_-_The_Neverwritten_Role_Playing_Game.mp3");
     // audio.play();
 
-    const imgUrl = playInfoContext.musicQueue !== null ? playInfoContext.musicQueue[playInfoContext.currentPlayIndex].thumbnail : null;
+    const currentSongInfo = playInfoContext.musicQueue !== null ? playInfoContext.musicQueue[playInfoContext.currentPlayIndex] : null;
+    const imgUrl = currentSongInfo !== null ? currentSongInfo.thumbnail : null;
 
     const playPauseClick = () => playInfoContext.setIsPlaying(!playInfoContext.isPlaying);
     
@@ -19,6 +20,7 @@ const MusicPlayer = () => {
         playInfoContext.setCurrentPlayIndex(null);
         playInfoContext.setIsPlaying(null);
     }
+
     
     return playInfoContext.isActive === true ? (
             <div className="fixed bottom-0 bg-slate-900 w-full text-black">
@@ -26,20 +28,37 @@ const MusicPlayer = () => {
                     <div className="rounded-3xl bg-red-600 w-1/4 h-full"/>
                 </div>
 
-                <div className="flex justify-between">
-                    <div className="flex text-white mt-auto mb-auto">
-                        <MdSkipPrevious size={36} className="cursor-pointer"/>
-                        <div className="cursor-pointer" onClick={playPauseClick}>
-                            {
-                                playInfoContext.isPlaying ?
-                                <MdPause size={36}/> :
-                                <MdPlayArrow size={36}/>
-                            }
+                <div className="flex justify-between pl-4 pr-4">
+                    <div className="flex gap-4">
+                        <div className="text-slate-400 m-auto text-sm">
+                            <span>00:00</span>
+                            <span> / </span>
+                            <span>{ currentSongInfo.duration }</span>
                         </div>
-                        <MdSkipNext size={36} className="cursor-pointer"/>
+                        <div className="flex text-white mt-auto mb-auto gap-1">
+                            <MdSkipPrevious size={40} className="cursor-pointer"/>
+                            <div className="cursor-pointer" onClick={playPauseClick}>
+                                {
+                                    playInfoContext.isPlaying ?
+                                    <MdPause size={40}/> :
+                                    <MdPlayArrow size={40}/>
+                                }
+                            </div>
+                            <MdSkipNext size={40} className="cursor-pointer"/>
+                        </div>
                     </div>
 
-                    <img src={imgUrl} className="h-20"/>
+                    <div className="flex">
+                        <img src={imgUrl} className="h-20"/>
+                        <div className="text-white w-52 m-auto ml-2">
+                            <div className="truncate font-bold">
+                                <span>{ currentSongInfo.title }</span>
+                            </div>
+                            <div className="underline truncate">
+                                <a href="/" target="_blank">{ currentSongInfo.artist_name }</a>
+                            </div>
+                        </div>
+                    </div>
 
                     <RxCross2 size={36} className="text-white cursor-pointer mt-auto mb-auto" onClick={closePlayer}/>
                 </div> 
