@@ -41,6 +41,7 @@ class YTMusicPlaylist extends YTMusicBase {
                 const musicContent = trueContent[index];
                 const musicData = musicContent["musicResponsiveListItemRenderer"];
                 const musicFlexCol = musicData["flexColumns"];
+                const musicFixedCol = musicData["fixedColumns"];
                 let tempObj = {};
 
                 // Thumbnail parsing
@@ -50,6 +51,9 @@ class YTMusicPlaylist extends YTMusicBase {
                 const idTitle = _parseMusicIdTitle(musicFlexCol, tempObj);
                 tempObj["music_id"] = idTitle[0];
                 tempObj["title"] = idTitle[1];
+
+                // Music Duration
+                tempObj["duration"] = _parseDuration(musicFixedCol);
                 
                 // Artist Details
                 const artist = _getArtist(musicFlexCol)
@@ -97,6 +101,12 @@ class YTMusicPlaylist extends YTMusicBase {
             }
 
             return [musicId, title];
+        }
+
+        let _parseDuration = (musicFixedCol) => {
+            const musicRLIFCRT = musicFixedCol[0]["musicResponsiveListItemFixedColumnRenderer"]["text"];
+            const mR0 = _getMR0(musicRLIFCRT);
+            return mR0["text"];
         }
 
         let _getMRLIFCRText = (musicCol) => {
