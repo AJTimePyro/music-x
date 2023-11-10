@@ -1,5 +1,6 @@
 const express = require("express");
 const YTMPlaylist = require("./utils/yt_music/ytmusicPlaylist");
+const YTMData = require("./utils/yt_music/ytmusicSongs");
 
 const app = express();
 const port = 5000;
@@ -10,8 +11,8 @@ app.get('/new-release', async (req, res) => {
     const query = req.query;
     const limit = query.limit && !isNaN(query.limit) ? parseInt(query.limit) : Number.MAX_SAFE_INTEGER;
 
-    const yt = await YTMPlaylist.getYTMusicList(limit, "newRelease");
-    res.json(yt);
+    const newReleaseSongs = await YTMPlaylist.getYTMusicList(limit, "newRelease");
+    res.json(newReleaseSongs);
 });
 
 // Trending Songs
@@ -19,10 +20,17 @@ app.get('/trending', async (req, res) => {
     const query = req.query;
     const limit = query.limit && !isNaN(query.limit) ? parseInt(query.limit) : Number.MAX_SAFE_INTEGER;
 
-    const yt = await YTMPlaylist.getYTMusicList(limit, "trending");
-    res.json(yt);
+    const trendingSongs = await YTMPlaylist.getYTMusicList(limit, "trending");
+    res.json(trendingSongs);
 });
 
+// Song Data
+app.get('/song-info/:musicId', async (req, res) => {
+    const songId = req.params.musicId;
+
+    const songData = YTMData.getYTMusicInfo(songId);
+    res.json(songData);
+});
 
 
 // Serving the server
