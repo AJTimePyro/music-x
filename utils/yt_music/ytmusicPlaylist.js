@@ -16,12 +16,12 @@ class YTMusicPlaylist extends YTMusicBase {
         this.limit = limit;
         this.songsList = [];
 
-        this.payload["browseId"] = "VL" + this.playlistId;
+        this.payloadWebClient["browseId"] = "VL" + this.playlistId;
 
         let _playlistData = async () => {
             const res = await super.sendpostreq(
                 this.api_url + "youtubei/v1/browse?key=" + this.key,
-                this.payload
+                this.payloadWebClient
             )
             if ("error" in res) {
                 throw new Error("Unable to reach to given playlist...");
@@ -73,17 +73,7 @@ class YTMusicPlaylist extends YTMusicBase {
 
         let _parseThumbnail = (musicData) => {
             const thumbnails=  musicData["thumbnail"]["musicThumbnailRenderer"]["thumbnail"]["thumbnails"];
-
-            const maxThumbnail = thumbnails.reduce(
-                (
-                    max,
-                    current
-                ) => {
-                    return (current.width > max.width) ? current : max;
-                }
-            );
-              
-            return maxThumbnail.url;              
+            return super.getBestThumbnail(thumbnails);
         }
 
         let _parseMusicIdTitle = (musicFlexCol, tempObj) => {

@@ -10,7 +10,7 @@ class YTMusicBase {
             "Content-Type": "application/json",
             "User-Agent": "Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:109.0) Gecko/20100101 Firefox/117.0"
         }
-        this.payload = {
+        this.payloadWebClient = {
             "context": {
                 "client": {
                     "clientName": "WEB_REMIX",
@@ -18,6 +18,21 @@ class YTMusicBase {
                 }
             }
         }
+        this.payloadAndroidClient = {
+            "context": {
+                "client": {
+                    "clientName": "ANDROID_MUSIC",
+                    "clientVersion": "5.16.51",
+                    "androidSdkVersion": 30
+                }
+            }
+        }
+
+        this.musicQuery = {
+            "key" : "AIzaSyAO_FJ2SlqU8Q4STEHLGCilw_Y9_11qcW8",
+            "contentCheckOk" : true,
+            "racyCheckOk" : true
+        };        
 
         let _sendRequest = async (
             url,
@@ -93,6 +108,18 @@ class YTMusicBase {
             reqHeaders
         )
         return res;
+    }
+
+    getBestThumbnail(thumbnails) {
+        const HQThumbnail = thumbnails.reduce((
+            max,
+            current
+        ) => {
+                return (current.width > max.width) ? current : max;
+            }
+        );
+
+        return HQThumbnail["url"];
     }
 }
 
