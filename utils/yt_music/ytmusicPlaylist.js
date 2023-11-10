@@ -136,9 +136,6 @@ class YTMusicPlaylist extends YTMusicBase {
             if (Object.keys(musicRLIFCRText).length !== 0) {
                 const musicR0 = _getMR0(musicRLIFCRText);
                 albumName = musicR0["text"]
-
-                // const navigationEndpoint = musicR0["navigationEndpoint"];
-                // console.log(navigationEndpoint);
                 albumId = "navigationEndpoint" in musicR0 ? musicR0["navigationEndpoint"]["browseEndpoint"]["browseId"] : null;
             }
 
