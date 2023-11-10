@@ -37,6 +37,6 @@ app.get('/song-info/:musicId', async (req, res) => {
 app.listen(
     port,
     () => {
-        console.log(`Example app listening on port ${port}`)
+        console.log(`Backend running on port ${port}`)
     }
 );
