@@ -92,8 +92,9 @@ class YTMusicPlaylist extends YTMusicBase {
             const title = musicR0["text"];
 
             let musicId;
-            if (("navigationEndpoint" in musicR0)) {
-                musicId = musicR0["navigationEndpoint"]["watchEndpoint"]["videoId"];
+            const watchEndPoint = "navigationEndpoint" in musicR0 ? musicR0["navigationEndpoint"]["watchEndpoint"] : null;
+            if (watchEndPoint) {
+                musicId = watchEndPoint["videoId"];
             }
             else {
                 const thumbnail = tempObj["thumbnail"];
@@ -135,7 +136,10 @@ class YTMusicPlaylist extends YTMusicBase {
             if (Object.keys(musicRLIFCRText).length !== 0) {
                 const musicR0 = _getMR0(musicRLIFCRText);
                 albumName = musicR0["text"]
-                albumId = musicR0["navigationEndpoint"]["browseEndpoint"]["browseId"]
+
+                // const navigationEndpoint = musicR0["navigationEndpoint"];
+                // console.log(navigationEndpoint);
+                albumId = "navigationEndpoint" in musicR0 ? musicR0["navigationEndpoint"]["browseEndpoint"]["browseId"] : null;
             }
 
             return [albumName, albumId];
