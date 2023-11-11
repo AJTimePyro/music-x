@@ -33,7 +33,6 @@ class YTMusic extends YTMusicBase {
             this.songInfo["duration"] = songDetails["lengthSeconds"];
             
             const thumbnailList = songDetails["thumbnail"]["thumbnails"];
-            console.log(thumbnailList);
             this.songInfo["thumbnail"] = super.getBestThumbnail(thumbnailList);
         }
 

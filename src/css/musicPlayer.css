@@ -1,0 +1,8 @@
+#progress-bar {
+    -webkit-appearance: none;
+}
+
+#progress-bar::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    background: rgb(15, 197, 197);
+}

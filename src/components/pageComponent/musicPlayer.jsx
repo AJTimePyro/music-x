@@ -1,4 +1,4 @@
-import { useContext } from "react";
+import { useContext, useEffect } from "react";
 import musicPlayContext from "../../context/musicPlayInfo/playContext";
 import { MdSkipNext, MdSkipPrevious, MdPlayArrow, MdPause } from "react-icons/md"
 import { RxCross2 } from "react-icons/rx";
@@ -9,6 +9,7 @@ const MusicPlayer = () => {
 
     const currentSongInfo = playInfoContext.musicQueue !== null ? playInfoContext.musicQueue[playInfoContext.currentPlayIndex] : null;
     const imgUrl = currentSongInfo !== null ? currentSongInfo.thumbnail : null;
+    const streamURL = playInfoContext.streamURL;
 
     const playPauseClick = () => playInfoContext.setPlayPause();
     
@@ -29,16 +30,35 @@ const MusicPlayer = () => {
         audioTag.play();
     }
 
+    useEffect(
+        () => {
+            const audioTag = document.getElementById("audioTag");
+            if (audioTag) {
+                audioTag.pause();
+                audioTag.load();
+                if (streamURL) audioTag.play();
+            }
+        
+            return () => {
+                if (audioTag) {
+                    audioTag.pause();
+                    audioTag.load();
+                }
+            };
+        },
+        [streamURL]
+    );
     
+
     return playInfoContext.isActive === true ? (
             <div className="fixed bottom-0 bg-slate-900 w-full text-black">
-                <div className="block h-1 w-full">
-                    <div className="rounded-3xl bg-red-600 w-1/4 h-full"/>
-                </div>
-
-                <audio controls id="audioTag" onLoadedMetadata={musicProgressOnLoad}>
-                    <source src={""}/>
-                </audio>
+                {
+                    streamURL ?
+                    <audio controls id="audioTag" onLoadedMetadata={musicProgressOnLoad} className="hidden">
+                        <source src={streamURL}/>
+                    </audio> :
+                    <></>
+                }
 
                 <input type="range" value={0} className="webkit-app-none bg-red-700 w-full rounded h-2 cursor-pointer" id="progress-bar"/>
 
@@ -63,7 +83,7 @@ const MusicPlayer = () => {
                     </div>
 
                     <div className="flex">
-                        <img src={imgUrl} className="h-20"/>
+                        <img src={imgUrl} alt="nothing" className="h-20"/>
                         <div className="text-white w-52 m-auto ml-2">
                             <div className="truncate font-bold">
                                 <span>{ currentSongInfo.title }</span>

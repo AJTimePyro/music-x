@@ -1,7 +1,6 @@
-import { useState } from "react";
+import { useState, useContext } from "react";
 import PlayPauseMCBtn from "./playPauseMCBtn";
 import musicPlayContext from "../../context/musicPlayInfo/playContext";
-import { useContext } from "react";
 
 function MusicCard(
     {
@@ -23,12 +22,17 @@ function MusicCard(
     }
 
     const playMusic = () => {
+        playInfoContext.fetchStreamURL(musicData.music_id);
         if (playInfoContext.currentQueueType !== songListType) {
             playInfoContext.changeMusicQueue(musicResInfo.song_info);
             playInfoContext.setCurrentQueueType(songListType);
         }
-        if (!playInfoContext.isActive) playInfoContext.setIsActive(true);
-        if (playInfoContext.currentPlayIndex != musicIndex) {
+        
+        if (!playInfoContext.isActive) {
+            playInfoContext.setIsActive(true);
+        }
+        
+        if (playInfoContext.currentPlayIndex !== musicIndex) {
             playInfoContext.setCurrentPlayIndex(musicIndex);
             playInfoContext.setIsPlaying(true);
             return;

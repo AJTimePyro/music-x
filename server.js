@@ -28,7 +28,7 @@ app.get('/trending', async (req, res) => {
 app.get('/song-info/:musicId', async (req, res) => {
     const songId = req.params.musicId;
 
-    const songData = YTMData.getYTMusicInfo(songId);
+    const songData = await YTMData.getYTMusicInfo(songId);
     res.json(songData);
 });
 

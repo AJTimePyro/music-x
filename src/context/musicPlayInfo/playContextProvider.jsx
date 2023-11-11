@@ -8,14 +8,26 @@ const MusicPlayState = (props) => {
     const [currentPlayIndex, setCurrentPlayIndex] = useState(null);
     const [musicQueue, changeMusicQueue] = useState(null);
     const [currentQueueType, setCurrentQueueType] = useState(null);
+    const [streamURL, setStreamURL] = useState(null);
 
     const setPlayPause = () => {
         const audioPlayer = document.getElementById("audioTag");
         if (audioPlayer) {
             if (!isPlaying) audioPlayer.play();
             else audioPlayer.pause();
-            setIsPlaying(!isPlaying);
         }
+        setIsPlaying(!isPlaying);
+    }
+
+    const fetchStreamURL = (musicId) => {
+        fetch(`/song-info/${musicId}`).then(
+            response => response.json()
+        ).then(
+            data => {
+                setStreamURL(data["songURL"]);
+                console.log(data);
+            }
+        )
     }
 
     return (            
@@ -26,12 +38,14 @@ const MusicPlayState = (props) => {
                 currentPlayIndex,
                 musicQueue,
                 currentQueueType,
+                streamURL,
                 setIsActive,
                 setIsPlaying,
                 setPlayPause,
                 setCurrentPlayIndex,
                 changeMusicQueue,
-                setCurrentQueueType
+                setCurrentQueueType,
+                fetchStreamURL
             }
         }>
             {props.children}
