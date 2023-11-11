@@ -9,6 +9,15 @@ const MusicPlayState = (props) => {
     const [musicQueue, changeMusicQueue] = useState(null);
     const [currentQueueType, setCurrentQueueType] = useState(null);
 
+    const setPlayPause = () => {
+        const audioPlayer = document.getElementById("audioTag");
+        if (audioPlayer) {
+            if (!isPlaying) audioPlayer.play();
+            else audioPlayer.pause();
+            setIsPlaying(!isPlaying);
+        }
+    }
+
     return (            
         <musicPlayContext.Provider value={
             {
@@ -19,6 +28,7 @@ const MusicPlayState = (props) => {
                 currentQueueType,
                 setIsActive,
                 setIsPlaying,
+                setPlayPause,
                 setCurrentPlayIndex,
                 changeMusicQueue,
                 setCurrentQueueType

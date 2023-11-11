@@ -33,7 +33,7 @@ function MusicCard(
             playInfoContext.setIsPlaying(true);
             return;
         }
-        playInfoContext.setIsPlaying(!playInfoContext.isPlaying);
+        playInfoContext.setPlayPause(!playInfoContext.isPlaying);
     }
 
     return (

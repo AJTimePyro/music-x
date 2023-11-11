@@ -2,23 +2,31 @@ import { useContext } from "react";
 import musicPlayContext from "../../context/musicPlayInfo/playContext";
 import { MdSkipNext, MdSkipPrevious, MdPlayArrow, MdPause } from "react-icons/md"
 import { RxCross2 } from "react-icons/rx";
+import "../../css/musicPlayer.css";
 
 const MusicPlayer = () => {
     const playInfoContext = useContext(musicPlayContext);
-    // const audio = new Audio("http://commondatastorage.googleapis.com/codeskulptor-demos/DDR_assets/Kangaroo_MusiQue_-_The_Neverwritten_Role_Playing_Game.mp3");
-    // audio.play();
 
     const currentSongInfo = playInfoContext.musicQueue !== null ? playInfoContext.musicQueue[playInfoContext.currentPlayIndex] : null;
     const imgUrl = currentSongInfo !== null ? currentSongInfo.thumbnail : null;
 
-    const playPauseClick = () => playInfoContext.setIsPlaying(!playInfoContext.isPlaying);
+    const playPauseClick = () => playInfoContext.setPlayPause();
     
     const closePlayer = () => {
         playInfoContext.setIsActive(false);
         playInfoContext.setCurrentQueueType(null);
         playInfoContext.changeMusicQueue(null);
         playInfoContext.setCurrentPlayIndex(null);
-        playInfoContext.setIsPlaying(null);
+        playInfoContext.setIsPlaying(false);
+    }
+
+    const musicProgressOnLoad = () => {
+        const audioTag = document.getElementById("audioTag");
+        const progressBar = document.getElementById("progress-bar");
+
+        progressBar.max = audioTag.duration;
+        progressBar.value = audioTag.current;
+        audioTag.play();
     }
 
     
@@ -27,6 +35,12 @@ const MusicPlayer = () => {
                 <div className="block h-1 w-full">
                     <div className="rounded-3xl bg-red-600 w-1/4 h-full"/>
                 </div>
+
+                <audio controls id="audioTag" onLoadedMetadata={musicProgressOnLoad}>
+                    <source src={""}/>
+                </audio>
+
+                <input type="range" value={0} className="webkit-app-none bg-red-700 w-full rounded h-2 cursor-pointer" id="progress-bar"/>
 
                 <div className="flex justify-between pl-4 pr-4">
                     <div className="flex gap-4">
