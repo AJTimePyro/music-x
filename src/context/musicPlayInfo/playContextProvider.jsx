@@ -25,9 +25,13 @@ const MusicPlayState = (props) => {
         ).then(
             data => {
                 setStreamURL(data["songURL"]);
-                console.log(data);
             }
         )
+    }
+
+    const addToCurrentIndex = (num) => {
+        fetchStreamURL(musicQueue[currentPlayIndex + num].music_id);
+        setCurrentPlayIndex(currentPlayIndex + num);
     }
 
     return (            
@@ -43,6 +47,7 @@ const MusicPlayState = (props) => {
                 setIsPlaying,
                 setPlayPause,
                 setCurrentPlayIndex,
+                addToCurrentIndex,
                 changeMusicQueue,
                 setCurrentQueueType,
                 fetchStreamURL

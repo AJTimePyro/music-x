@@ -23,11 +23,13 @@ const MusicPlayer = () => {
 
     const musicProgressOnLoad = () => {
         const audioTag = document.getElementById("audioTag");
-        const progressBar = document.getElementById("progress-bar");
-
-        progressBar.max = audioTag.duration;
-        progressBar.value = audioTag.current;
-        audioTag.play();
+        if (audioTag) {
+            const progressBar = document.getElementById("progress-bar");
+    
+            progressBar.max = audioTag.duration;
+            progressBar.value = audioTag.current;
+            audioTag.play();
+        }
     }
 
     useEffect(
@@ -52,8 +54,8 @@ const MusicPlayer = () => {
     if (playInfoContext.isPlaying) {
         setInterval(
             () => {
-                if (playInfoContext.isActive) {
-                    const audioTag = document.getElementById("audioTag");
+                const audioTag = document.getElementById("audioTag");
+                if (audioTag) {
                     const progressBar = document.getElementById("progress-bar");
                     progressBar.value = audioTag.currentTime;
                 }
@@ -65,8 +67,18 @@ const MusicPlayer = () => {
     const progressBarChange = () => {
         const audioTag = document.getElementById("audioTag");
         const progressBar = document.getElementById("progress-bar");
-        audioTag.play();
         audioTag.currentTime = progressBar.value;
+        audioTag.play();
+    }
+
+    const nextBtn = () => {
+        playInfoContext.addToCurrentIndex(1);
+        console.log(playInfoContext.currentPlayIndex);
+    }
+
+    const prevBtn = () => {
+        playInfoContext.addToCurrentIndex(-1);
+        console.log(playInfoContext.currentPlayIndex);
     }
 
     return playInfoContext.isActive === true ? (
@@ -89,7 +101,7 @@ const MusicPlayer = () => {
                             <span>{ currentSongInfo.duration }</span>
                         </div>
                         <div className="flex text-white mt-auto mb-auto gap-1">
-                            <MdSkipPrevious size={40} className="cursor-pointer"/>
+                            <MdSkipPrevious size={40} className="cursor-pointer" onClick={prevBtn}/>
                             <div className="cursor-pointer" onClick={playPauseClick}>
                                 {
                                     playInfoContext.isPlaying ?
@@ -97,7 +109,7 @@ const MusicPlayer = () => {
                                     <MdPlayArrow size={40}/>
                                 }
                             </div>
-                            <MdSkipNext size={40} className="cursor-pointer"/>
+                            <MdSkipNext size={40} className="cursor-pointer" onClick={nextBtn}/>
                         </div>
                     </div>
 
