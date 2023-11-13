@@ -48,7 +48,26 @@ const MusicPlayer = () => {
         },
         [streamURL]
     );
-    
+
+    if (playInfoContext.isPlaying) {
+        setInterval(
+            () => {
+                if (playInfoContext.isActive) {
+                    const audioTag = document.getElementById("audioTag");
+                    const progressBar = document.getElementById("progress-bar");
+                    progressBar.value = audioTag.currentTime;
+                }
+            },
+            500
+        );
+    }
+
+    const progressBarChange = () => {
+        const audioTag = document.getElementById("audioTag");
+        const progressBar = document.getElementById("progress-bar");
+        audioTag.play();
+        audioTag.currentTime = progressBar.value;
+    }
 
     return playInfoContext.isActive === true ? (
             <div className="fixed bottom-0 bg-slate-900 w-full text-black">
@@ -60,7 +79,7 @@ const MusicPlayer = () => {
                     <></>
                 }
 
-                <input type="range" value={0} className="webkit-app-none bg-red-700 w-full rounded h-2 cursor-pointer" id="progress-bar"/>
+                <input type="range" className="webkit-app-none bg-red-700 w-full rounded h-2 cursor-pointer" id="progress-bar" onChange={progressBarChange}/>
 
                 <div className="flex justify-between pl-4 pr-4">
                     <div className="flex gap-4">
