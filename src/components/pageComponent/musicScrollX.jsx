@@ -67,16 +67,15 @@ function MusicScrollX(scrollXData) {
 
             <div id={scrollXData.scrollId} className="flex w-full h-full overflow-x-scroll scroll-smooth whitespace-nowrap no-scrollbar">
                 {
-                    (songsList != [{}]) ?
                     songsList.map(
-                            (musicData) => (
-                                <MusicCard
-                                key={musicData.music_id}
-                                musicData={musicData}
-                                musicResInfo={songsInfo}
-                                />
-                            )
-                        ) : ""
+                        (musicData) => (
+                            <MusicCard
+                            key={musicData.music_id}
+                            musicData={musicData}
+                            musicResInfo={songsInfo}
+                            />
+                        )
+                    )
                 }
             </div>
         </section>
