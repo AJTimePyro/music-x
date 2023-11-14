@@ -7,7 +7,7 @@ const app = express();
 const port = 5000;
 
 // app.use(express.static(path.join(__dirname + "/build")))
-app.use(express.static(path.join(__dirname + "/vecel/output")))
+app.use(express.static(path.join(__dirname + "/vercel/output")))
 
 // routing
 // New Releases
