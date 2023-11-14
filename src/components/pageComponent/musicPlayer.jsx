@@ -92,16 +92,20 @@ const MusicPlayer = () => {
     }
 
     return playInfoContext.isActive === true ? (
-            <div className="fixed bottom-0 bg-slate-900 w-full text-black">
+            <div className="fixed bottom-0 bg-slate-900 w-full text-black flex flex-col">
                 {
-                    streamURL ?
+                    streamURL &&
                     <audio controls id="audioTag" onLoadedMetadata={musicProgressOnLoad} className="hidden" onEnded={songEnd}>
                         <source src={streamURL}/>
-                    </audio> :
-                    <></>
+                    </audio>
                 }
 
-                <input type="range" className="webkit-app-none bg-red-700 w-full rounded h-2 cursor-pointer" id="progress-bar" onChange={progressBarChange}/>
+                <input
+                    type="range"
+                    className="appearance-none bg-slate-900 w-full h-2 outline-none rounded-lg cursor-pointer focus:outline-none hover:shadow-2xl"
+                    id="progress-bar"
+                    onChange={progressBarChange}
+                />
 
                 <div className="flex justify-between pl-4 pr-4">
                     <div className="flex gap-4">
