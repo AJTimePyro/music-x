@@ -80,19 +80,17 @@ const MusicPlayer = () => {
 
     const nextBtn = () => {
         playInfoContext.addToCurrentIndex(1);
-        console.log(playInfoContext.currentPlayIndex);
     }
 
     const prevBtn = () => {
         playInfoContext.addToCurrentIndex(-1);
-        console.log(playInfoContext.currentPlayIndex);
     }
 
     return playInfoContext.isActive === true ? (
             <div className="fixed bottom-0 bg-slate-900 w-full text-black">
                 {
                     streamURL ?
-                    <audio controls id="audioTag" onLoadedMetadata={musicProgressOnLoad} className="hidden">
+                    <audio controls id="audioTag" onLoadedMetadata={musicProgressOnLoad} className="hidden" onEnded={nextBtn}>
                         <source src={streamURL}/>
                     </audio> :
                     <></>
