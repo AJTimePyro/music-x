@@ -67,7 +67,7 @@ const MusicPlayer = () => {
                     setCurrentTime(mmssFormat);
                 }
             },
-            500
+            1000
         );
     }
 
@@ -86,11 +86,16 @@ const MusicPlayer = () => {
         playInfoContext.addToCurrentIndex(-1);
     }
 
+    const songEnd = () => {
+        setCurrentTime("00:00");
+        nextBtn();
+    }
+
     return playInfoContext.isActive === true ? (
             <div className="fixed bottom-0 bg-slate-900 w-full text-black">
                 {
                     streamURL ?
-                    <audio controls id="audioTag" onLoadedMetadata={musicProgressOnLoad} className="hidden" onEnded={nextBtn}>
+                    <audio controls id="audioTag" onLoadedMetadata={musicProgressOnLoad} className="hidden" onEnded={songEnd}>
                         <source src={streamURL}/>
                     </audio> :
                     <></>
