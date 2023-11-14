@@ -1,4 +1,4 @@
-import { useContext, useEffect } from "react";
+import { useContext, useEffect, useState } from "react";
 import musicPlayContext from "../../context/musicPlayInfo/playContext";
 import { MdSkipNext, MdSkipPrevious, MdPlayArrow, MdPause } from "react-icons/md"
 import { RxCross2 } from "react-icons/rx";
@@ -6,6 +6,7 @@ import "../../css/musicPlayer.css";
 
 const MusicPlayer = () => {
     const playInfoContext = useContext(musicPlayContext);
+    const [currentTime, setCurrentTime] = useState('00:00');
 
     const currentSongInfo = playInfoContext.musicQueue !== null ? playInfoContext.musicQueue[playInfoContext.currentPlayIndex] : null;
     const imgUrl = currentSongInfo !== null ? currentSongInfo.thumbnail : null;
@@ -57,7 +58,13 @@ const MusicPlayer = () => {
                 const audioTag = document.getElementById("audioTag");
                 if (audioTag) {
                     const progressBar = document.getElementById("progress-bar");
-                    progressBar.value = audioTag.currentTime;
+                    const cTime = audioTag.currentTime;
+                    progressBar.value = cTime;
+
+                    const minutes = Math.floor(cTime / 60);
+                    const remainingSeconds = parseInt(cTime % 60);
+                    const mmssFormat = `${String(minutes).padStart(2, '0')}:${String(remainingSeconds).padStart(2, '0')}`;
+                    setCurrentTime(mmssFormat);
                 }
             },
             500
@@ -96,7 +103,7 @@ const MusicPlayer = () => {
                 <div className="flex justify-between pl-4 pr-4">
                     <div className="flex gap-4">
                         <div className="text-slate-400 m-auto text-sm">
-                            <span>00:00</span>
+                            <span>{ currentTime }</span>
                             <span> / </span>
                             <span>{ currentSongInfo.duration }</span>
                         </div>
