@@ -3,8 +3,7 @@
     "builds": [
         {
             "src": "package.json",
-            "use": "@vercel/node",
-            "outputDirectory" : "/build"
+            "use": "@vercel/node"
         },
         {
             "src": "server.js",
@@ -15,10 +14,6 @@
         {
             "src": "/(.*)",
             "dest": "server.js"
-        },
-        {
-            "src": "/(.*)",
-            "dest": "/"
         }
     ]
 }
