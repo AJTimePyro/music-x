@@ -25,9 +25,7 @@ const MusicPlayer = () => {
         const audioTag = document.getElementById("audioTag");
         if (audioTag) {
             const progressBar = document.getElementById("progress-bar");
-    
             progressBar.max = audioTag.duration;
-            progressBar.value = audioTag.current;
             audioTag.play();
         }
     }
@@ -80,6 +78,7 @@ const MusicPlayer = () => {
                     type="range"
                     className="appearance-none bg-slate-900 w-full h-2 outline-none rounded-lg cursor-pointer focus:outline-none hover:shadow-2xl"
                     id="progress-bar"
+                    value={0}
                     onChange={progressBarChange}
                 />
 
