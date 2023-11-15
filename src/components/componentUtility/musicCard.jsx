@@ -22,7 +22,6 @@ function MusicCard(
     }
 
     const playMusic = () => {
-        playInfoContext.fetchStreamURL(musicData.music_id);
         if (playInfoContext.currentQueueType !== songListType) {
             playInfoContext.changeMusicQueue(musicResInfo.song_info);
             playInfoContext.setCurrentQueueType(songListType);
@@ -33,6 +32,7 @@ function MusicCard(
         }
         
         if (playInfoContext.currentPlayIndex !== musicIndex) {
+            playInfoContext.fetchStreamURL(musicData.music_id);
             playInfoContext.setCurrentPlayIndex(musicIndex);
             playInfoContext.setPlayPause(true);
             return;
