@@ -34,10 +34,10 @@ function MusicCard(
         
         if (playInfoContext.currentPlayIndex !== musicIndex) {
             playInfoContext.setCurrentPlayIndex(musicIndex);
-            playInfoContext.setIsPlaying(true);
+            playInfoContext.setPlayPause(true);
             return;
         }
-        playInfoContext.setPlayPause(!playInfoContext.isPlaying);
+        playInfoContext.togglePlayPause();
     }
 
     return (

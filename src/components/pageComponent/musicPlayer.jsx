@@ -1,4 +1,4 @@
-import { useContext, useEffect, useState } from "react";
+import { useContext, useState } from "react";
 import musicPlayContext from "../../context/musicPlayInfo/playContext";
 import { MdSkipNext, MdSkipPrevious, MdPlayArrow, MdPause } from "react-icons/md"
 import { RxCross2 } from "react-icons/rx";
@@ -10,16 +10,15 @@ const MusicPlayer = () => {
 
     const currentSongInfo = playInfoContext.musicQueue !== null ? playInfoContext.musicQueue[playInfoContext.currentPlayIndex] : null;
     const imgUrl = currentSongInfo !== null ? currentSongInfo.thumbnail : null;
-    const streamURL = playInfoContext.streamURL;
 
-    const playPauseClick = () => playInfoContext.setPlayPause();
+    const playPauseClick = () => playInfoContext.togglePlayPause();
     
     const closePlayer = () => {
         playInfoContext.setIsActive(false);
         playInfoContext.setCurrentQueueType(null);
         playInfoContext.changeMusicQueue(null);
         playInfoContext.setCurrentPlayIndex(null);
-        playInfoContext.setIsPlaying(false);
+        playInfoContext.setPlayPause(false);
     }
 
     const musicProgressOnLoad = () => {
@@ -32,25 +31,6 @@ const MusicPlayer = () => {
             audioTag.play();
         }
     }
-
-    useEffect(
-        () => {
-            const audioTag = document.getElementById("audioTag");
-            if (audioTag) {
-                audioTag.pause();
-                audioTag.load();
-                if (streamURL) audioTag.play();
-            }
-        
-            return () => {
-                if (audioTag) {
-                    audioTag.pause();
-                    audioTag.load();
-                }
-            };
-        },
-        [streamURL]
-    );
 
     if (playInfoContext.isPlaying) {
         setInterval(
@@ -75,7 +55,6 @@ const MusicPlayer = () => {
         const audioTag = document.getElementById("audioTag");
         const progressBar = document.getElementById("progress-bar");
         audioTag.currentTime = progressBar.value;
-        audioTag.play();
     }
 
     const nextBtn = () => {
@@ -93,12 +72,9 @@ const MusicPlayer = () => {
 
     return playInfoContext.isActive === true ? (
             <div className="fixed bottom-0 bg-slate-900 w-full text-black flex flex-col">
-                {
-                    streamURL &&
-                    <audio controls id="audioTag" onLoadedMetadata={musicProgressOnLoad} className="hidden" onEnded={songEnd}>
-                        <source src={streamURL}/>
-                    </audio>
-                }
+                <audio controls id="audioTag" onLoadedMetadata={musicProgressOnLoad} className="hidden" onEnded={songEnd}>
+                    <source/>
+                </audio>
 
                 <input
                     type="range"
