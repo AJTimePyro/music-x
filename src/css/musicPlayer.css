@@ -2,6 +2,8 @@
     --red-color: #dc2626
 }
 
+/* Progress Bar */
+/* Circle slider of progress bar */
 #progress-bar::-webkit-slider-thumb {
     width: 12px;
     height: 12px;
@@ -29,6 +31,7 @@
     appearance: none;
 }
 
+/* Left completed portion of progress bar */
 #progress-bar::-moz-range-progress {
     width: 8px;
     height: 8px;
@@ -48,4 +51,73 @@
     height: 8px;
     background-color: var(--red-color);
     appearance: none;
+}
+
+/* Volume Bar */
+/* Circle slider of volume bar */
+#volume-bar::-webkit-slider-thumb {
+    width: 12px;
+    height: 12px;
+    background-color: #0f172a;
+    border: 2px solid #778da9;
+    border-radius: 50%;
+    appearance: none;
+}
+
+#volume-bar::-moz-range-thumb {
+    
+    width: 12px;
+    height: 12px;
+    background-color: #0f172a;
+    border: 2px solid #778da9;
+    border-radius: 50%;
+    appearance: none;
+}
+
+#volume-bar::-ms-thumb {
+    width: 12px;
+    height: 12px;
+    background-color: #0f172a;
+    border: 2px solid #778da9;
+    border-radius: 50%;
+    appearance: none;
+}
+
+/* Left completed portion of volume bar */
+#volume-bar::-moz-range-progress {
+    width: 8px;
+    height: 8px;
+    background-color: #415a77;
+    appearance: none;
+    border-radius: 18px;
+}
+
+#volume-bar::-webkit-progress-value {
+    width: 8px;
+    height: 8px;
+    background-color: #415a77;
+    appearance: none;
+    border-radius: 18px;
+}
+
+#volume-bar::-ms-fill-lower {
+    width: 8px;
+    height: 8px;
+    background-color: #415a77;
+    appearance: none;
+    border-radius: 18px;
+}
+
+
+/* Right remaining portion of volume bar */
+#volume-bar::-moz-range-track {
+    height: 8px;
+    background-color: #1b263b;
+    border-radius: 18px;
+}
+
+#volume-bar::-webkit-progress-value {
+    height: 8px;
+    background-color: #2b2d42;
+    border-radius: 18px;
 }
