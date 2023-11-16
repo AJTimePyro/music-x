@@ -103,29 +103,29 @@ const MusicPlayer = () => {
                     onChange={progressBarChange}
                 />
 
-                <div className="flex justify-between pl-4 pr-4">
-                    <div className="flex gap-4">
-                        <div className="text-slate-400 m-auto text-sm">
+                <div className="flex justify-between pl-4 pr-4 max-sm:pl-1 max-sm:pr-1">
+                    <div className="flex gap-4 max-sm:flex-col max-sm:mb-auto max-sm:mt-auto max-sm:gap-2">
+                        <div className="text-slate-400 m-auto text-sm max-md:text-xs whitespace-nowrap">
                             <span>{ currentTime }</span>
                             <span> / </span>
                             <span>{ currentSongInfo.duration }</span>
                         </div>
-                        <div className="flex text-white mt-auto mb-auto gap-1">
-                            <MdSkipPrevious size={40} className="cursor-pointer" onClick={prevBtn}/>
+                        <div className="flex text-white mt-auto mb-auto gap-1 max-sm:gap-0 items-center">
+                            <MdSkipPrevious size={30} className="cursor-pointer max-sm:h-6" onClick={prevBtn}/>
                             <div className="cursor-pointer" onClick={playPauseClick}>
                                 {
                                     playInfoContext.isPlaying ?
-                                    <MdPause size={40}/> :
-                                    <MdPlayArrow size={40}/>
+                                    <MdPause size={30}/> :
+                                    <MdPlayArrow size={30}/>
                                 }
                             </div>
-                            <MdSkipNext size={40} className="cursor-pointer" onClick={nextBtn}/>
+                            <MdSkipNext size={30} className="cursor-pointer max-sm:h-6" onClick={nextBtn}/>
                         </div>
                     </div>
 
                     <div className="flex">
-                        <img src={imgUrl} alt="nothing" className="h-20"/>
-                        <div className="text-white w-52 m-auto ml-2">
+                        <img src={imgUrl} alt="nothing" className="h-20 max-sm:h-16"/>
+                        <div className="text-white w-52 max-md:text-sm max-md:w-40 max-sm:w-28 m-auto ml-2">
                             <div className="truncate font-bold">
                                 <span>{ currentSongInfo.title }</span>
                             </div>
@@ -135,23 +135,23 @@ const MusicPlayer = () => {
                         </div>
                     </div>
 
-                    <div className="text-white flex mt-auto mb-auto gap-4">
-                        <div className="flex items-center group mt-auto mb-auto gap-4">
+                    <div className="text-white flex  items-center gap-2">
+                        <div id="volume-controller" className="flex items-center  group gap-4 max-sm:gap-0 max-sm:flex-col max-sm:-rotate-90 max-sm:m-0 max-sm:relative max-sm:left-6">
                             <input
                                 type="range"
                                 id="volume-bar"
-                                className="appearance-none opacity-0 transition-opacity duration-300 ease-in-out group-hover:opacity-100 w-28 cursor-pointer rounded-lg bg-slate-900"
+                                className="appearance-none opacity-0 transition-opacity duration-300 ease-in-out group-hover:opacity-100 w-28 max-md:w-20 max-sm:w-16 max-md:opacity-100 cursor-pointer rounded-lg bg-slate-900 max-sm:appearance-[slider-vertical]"
                                 min={0}
                                 max={100}
                                 defaultValue={100}
                                 onChange={volumeBarChange}
                             />
                             {
-                                isMute ? <RiVolumeMuteFill size={25} className="cursor-pointer" onClick={toggleMute}/> :
-                                <RiVolumeUpFill size={25} className="cursor-pointer" onClick={toggleMute}/>
+                                isMute ? <RiVolumeMuteFill size={25} className="cursor-pointer max-sm:hidden" onClick={toggleMute}/> :
+                                <RiVolumeUpFill size={25} className="cursor-pointer max-sm:hidden" onClick={toggleMute}/>
                             }
                         </div>
-                        <RxCross2 size={36} className="cursor-pointer " onClick={closePlayer}/>
+                        <RxCross2 size={30} className="cursor-pointer max-sm:h-[1.5rem]" onClick={closePlayer}/>
                     </div>
                 </div> 
             </div>
