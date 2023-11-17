@@ -121,3 +121,30 @@
     background-color: #2b2d42;
     border-radius: 18px;
 }
+
+/* Animation for music player */
+@keyframes slideUp {
+    from {
+      transform: translateY(100%);
+    }
+    to {
+      transform: translateY(0);
+    }
+}
+
+.slide-up-container {
+    animation: slideUp 0.3s ease-in-out;
+}
+
+@keyframes slideDown {
+    from {
+      transform: translateY(0);
+    }
+    to {
+      transform: translateY(100%);
+    }
+}
+
+.slide-down-container {
+    animation: slideDown 0.3s ease-in-out;
+}

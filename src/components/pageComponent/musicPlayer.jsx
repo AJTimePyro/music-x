@@ -16,11 +16,22 @@ const MusicPlayer = () => {
     const playPauseClick = () => playInfoContext.togglePlayPause();
     
     const closePlayer = () => {
-        playInfoContext.setIsActive(false);
-        playInfoContext.setCurrentQueueType(null);
-        playInfoContext.changeMusicQueue(null);
-        playInfoContext.setCurrentPlayIndex(null);
-        playInfoContext.setPlayPause(false);
+        const closingPlayer = () => {
+            playInfoContext.setIsActive(false);
+            playInfoContext.setCurrentQueueType(null);
+            playInfoContext.changeMusicQueue(null);
+            playInfoContext.setCurrentPlayIndex(null);
+            playInfoContext.setPlayPause(false);
+        }
+
+        try {
+            const musicPlayer = document.getElementById("music-player");
+            musicPlayer.classList.remove("slide-up-container");
+            musicPlayer.classList.add("slide-down-container");
+        } catch (e) {
+            return closingPlayer();
+        }
+        setTimeout(closingPlayer, 300);
     }
 
     const musicProgressOnLoad = () => {
@@ -91,7 +102,7 @@ const MusicPlayer = () => {
     }
 
     return playInfoContext.isActive === true ? (
-            <div className="fixed bottom-0 bg-slate-900 w-full text-black flex flex-col">
+            <div id="music-player" className="fixed bottom-0 bg-slate-900 w-full text-black flex flex-col slide-up-container">
                 <audio controls id="audioTag" onLoadedMetadata={musicProgressOnLoad} className="hidden" onEnded={songEnd}>
                     <source/>
                 </audio>
@@ -155,7 +166,7 @@ const MusicPlayer = () => {
                     </div>
                 </div> 
             </div>
-    ) : null
+    ) : <></>
 }
 
 export default MusicPlayer;
