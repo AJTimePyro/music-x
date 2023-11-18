@@ -5,7 +5,7 @@ class YTMusicSearch extends YTMusicBase {
     constructor(query) {
         super();
         this.payloadWebClient["query"] = query;
-        this.payloadAndroidClient["params"] = "EgWKAQIIAWoQEAoQCRADEAQQBRAREBAQFQ%3D%3D";
+        this.payloadWebClient["params"] = "EgWKAQIIAWoQEAoQCRADEAQQBRAREBAQFQ%3D%3D";
         this.searchResults = [];
 
         let _searchData = async () => {
@@ -29,7 +29,7 @@ class YTMusicSearch extends YTMusicBase {
             for (const index in trueContent) {
                 const musicContent = trueContent[index];
                 const mRLITR = musicContent["musicResponsiveListItemRenderer"];
-                const musicFlexCol = musicContent["flexColumns"];
+                const musicFlexCol = mRLITR["flexColumns"];
                 const musicFlexCol1 = musicFlexCol[1];
                 const mRLITFCRruns = _getmRLITFCRruns(musicFlexCol1);
 
@@ -63,7 +63,7 @@ class YTMusicSearch extends YTMusicBase {
         };
 
         let _parseThumbnail = (mRLITR) => {
-            const thumbnailList = mRLITR["musicThumbnailRenderer"]["thumbnail"]["thumbnails"];
+            const thumbnailList = mRLITR["thumbnail"]["musicThumbnailRenderer"]["thumbnail"]["thumbnails"];
             return super.getBestThumbnail(thumbnailList);
         };
 
@@ -101,10 +101,7 @@ class YTMusicSearch extends YTMusicBase {
         };
 
         let _parseDuration = (musicFlexCol) => {
-            const mRLITFCRruns = _getmRLITFCRruns(musicFlexCol);
-            const mRLITFCRrunsLast = mRLITFCRruns[mRLITFCRruns.length - 1];
-
-            return mRLITFCRrunsLast["text"];
+            return musicFlexCol["text"];
         };
 
         this.extraction = async () => {
@@ -122,7 +119,9 @@ async function getYTMSearchResult(
 ) {
     let ytNewRe = new YTMusicSearch(query);
     await ytNewRe.start();
-    return ytNewRe.songsList;
+    return ytNewRe.searchResults;
 }
 
-module.exports = getYTMSearchResult;
+module.exports = {
+    getYTMSearchResult
+};

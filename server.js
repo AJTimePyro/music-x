@@ -2,6 +2,7 @@ const express = require("express");
 const path = require("path");
 const YTMPlaylist = require("./utils/yt_music/ytmusicPlaylist");
 const YTMData = require("./utils/yt_music/ytmusicSongs");
+const YTMSearch = require("./utils/yt_music/ytmusicSearch");
 
 const app = express();
 const port = 5000;
@@ -33,6 +34,23 @@ app.get('/song-info/:musicId', async (req, res) => {
 
     const songData = await YTMData.getYTMusicInfo(songId);
     res.json(songData);
+});
+
+// Song Data
+app.get('/search', async (req, res) => {
+    const query = req.query;
+    const searchQuery = query.query;
+
+    if (searchQuery) {
+        const songData = await YTMSearch.getYTMSearchResult(searchQuery);
+        console.log(songData);
+        res.json(songData);
+    }
+    else res.json(
+        {
+            "error" : "query not given"
+        }
+    );
 });
 
 
