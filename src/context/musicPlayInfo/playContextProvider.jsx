@@ -32,7 +32,7 @@ const MusicPlayState = (props) => {
     }
 
     const fetchStreamURL = (musicId) => {
-        fetch(`/song-info/${musicId}`).then(
+        fetch(`api/song-info/${musicId}`).then(
             response => response.json()
         ).then(
             data => {

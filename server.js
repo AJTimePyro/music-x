@@ -11,7 +11,7 @@ app.use(express.static(path.join(__dirname + "/build")))
 
 // routing
 // New Releases
-app.get('/new-release', async (req, res) => {
+app.get('/api/new-release', async (req, res) => {
     const query = req.query;
     const limit = query.limit && !isNaN(query.limit) ? parseInt(query.limit) : Number.MAX_SAFE_INTEGER;
 
@@ -20,7 +20,7 @@ app.get('/new-release', async (req, res) => {
 });
 
 // Trending Songs
-app.get('/trending', async (req, res) => {
+app.get('/api/trending', async (req, res) => {
     const query = req.query;
     const limit = query.limit && !isNaN(query.limit) ? parseInt(query.limit) : Number.MAX_SAFE_INTEGER;
 
@@ -29,7 +29,7 @@ app.get('/trending', async (req, res) => {
 });
 
 // Song Data
-app.get('/song-info/:musicId', async (req, res) => {
+app.get('/api/song-info/:musicId', async (req, res) => {
     const songId = req.params.musicId;
 
     const songData = await YTMData.getYTMusicInfo(songId);
@@ -37,7 +37,7 @@ app.get('/song-info/:musicId', async (req, res) => {
 });
 
 // Song Data
-app.get('/search', async (req, res) => {
+app.get('/api/search', async (req, res) => {
     const query = req.query;
     const searchQuery = query.query;
 
