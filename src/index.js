@@ -4,6 +4,7 @@ import App from './App';
 import { RouterProvider, createBrowserRouter } from 'react-router-dom';
 import HomeBody from './components/pageComponent/homeContent';
 import './css/index.css';
+import SearchComponent from './components/pageComponent/searchContent';
 
 const router = createBrowserRouter(
   [
@@ -17,7 +18,7 @@ const router = createBrowserRouter(
         },
         {
           path : '/search',
-          // element : 
+          element : <SearchComponent />
         }
       ]
     }

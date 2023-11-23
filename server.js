@@ -36,14 +36,13 @@ app.get('/api/song-info/:musicId', async (req, res) => {
     res.json(songData);
 });
 
-// Song Data
+// Search song
 app.get('/api/search', async (req, res) => {
     const query = req.query;
     const searchQuery = query.query;
 
     if (searchQuery) {
         const songData = await YTMSearch.getYTMSearchResult(searchQuery);
-        console.log(songData);
         res.json(songData);
     }
     else res.json(
