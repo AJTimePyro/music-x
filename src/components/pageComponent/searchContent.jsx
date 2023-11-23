@@ -3,7 +3,7 @@ import { useSearchParams } from "react-router-dom";
 import MusicCard from "../componentUtility/musicCard";
 
 function SearchComponent() {
-    const [searchParams, setSearchParams] = useSearchParams();
+    const [searchParams] = useSearchParams();
 
     const query = searchParams.get("query");
 
@@ -23,7 +23,7 @@ function SearchComponent() {
                 }
             )
         },
-        []
+        [query]
     )
 
     return (
