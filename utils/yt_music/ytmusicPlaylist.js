@@ -163,7 +163,7 @@ async function getYTMusicList(
     const songData = await getYTPlaylistInfo(playlistId, limit);
     let responseData = {
         "type" : type,
-        "song_info" : songData
+        "song_list" : songData
     }
     return responseData;
 }
