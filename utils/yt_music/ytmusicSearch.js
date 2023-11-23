@@ -90,7 +90,8 @@ class YTMusicSearch extends YTMusicBase {
         };
 
         let _getNavBrEndpointBrId = (mRLITFCRruns) => {
-            return mRLITFCRruns["navigationEndpoint"]["browseEndpoint"]["browseId"];
+            const navEndPoint = mRLITFCRruns["navigationEndpoint"];
+            return navEndPoint ? navEndPoint["browseEndpoint"]["browseId"] : null;
         };
 
         let _getAlbum = (mRLITFCRruns) => {
