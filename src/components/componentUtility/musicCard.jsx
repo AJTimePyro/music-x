@@ -23,7 +23,7 @@ function MusicCard(
 
     const playMusic = () => {
         if (playInfoContext.currentQueueType !== songListType) {
-            playInfoContext.changeMusicQueue(musicResInfo.song_info);
+            playInfoContext.changeMusicQueue(musicResInfo.song_list);
             playInfoContext.setCurrentQueueType(songListType);
         }
         

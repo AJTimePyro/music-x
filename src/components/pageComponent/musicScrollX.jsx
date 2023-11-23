@@ -14,7 +14,7 @@ function MusicScrollX(scrollXData) {
             ).then(
                 data => {
                     setSongsInfo(data);
-                    setSongsList(data.song_info);
+                    setSongsList(data.song_list);
                 }
             )
         },

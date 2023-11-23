@@ -119,7 +119,11 @@ async function getYTMSearchResult(
 ) {
     let ytNewRe = new YTMusicSearch(query);
     await ytNewRe.start();
-    return ytNewRe.searchResults;
+    let responseData = {
+        "type" : "search_" + query,
+        "song_list" : ytNewRe.searchResults
+    }
+    return responseData;
 }
 
 module.exports = {
