@@ -5,13 +5,15 @@ import MusicCard from "../componentUtility/musicCard";
 function SearchComponent() {
     const [searchParams, setSearchParams] = useSearchParams();
 
+    const query = searchParams.get("query");
+
     const [searchInfo, setSearchInfo] = useState({});
     const [searchResult, setSearchResult] = useState([{}]);
 
     useEffect(
         () => {
             fetch(
-                "api/search?query=" + searchParams.get("query")
+                "api/search?query=" + query
             ).then(
                 response => response.json()
             ).then(
@@ -25,8 +27,8 @@ function SearchComponent() {
     )
 
     return (
-        <main>
-            <div className="flex w-full h-full overflow-x-scroll scroll-smooth whitespace-nowrap no-scrollbar">
+        <main className="bg-slate-800 flex flex-col">
+            <div className="flex w-full h-full flex-wrap justify-center mt-4">
                 {
                     searchResult.map(
                         (musicData) => (
