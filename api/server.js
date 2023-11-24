@@ -1,13 +1,13 @@
 const express = require("express");
 const path = require("path");
-const YTMPlaylist = require("./utils/yt_music/ytmusicPlaylist");
-const YTMData = require("./utils/yt_music/ytmusicSongs");
-const YTMSearch = require("./utils/yt_music/ytmusicSearch");
+const YTMPlaylist = require("../utils/yt_music/ytmusicPlaylist");
+const YTMData = require("../utils/yt_music/ytmusicSongs");
+const YTMSearch = require("../utils/yt_music/ytmusicSearch");
 
 const app = express();
 const port = 5000;
 
-app.use(express.static(path.join(__dirname + "/build")))
+app.use(express.static(path.join(__dirname + "/../build")));
 
 // routing
 // New Releases
