@@ -52,7 +52,7 @@ function MusicCard(
                 } onMouseEnter={mouseEnteredCard} onMouseLeave={mouseLeftCard} onClick={playMusic}>
 
                 <img className={
-                    `hover:brightness-75 h-[calc(100vw/6)] max-md:h-52 max-sm:h-36 ${
+                    `hover:brightness-75 h-[calc(100vw/6)] max-md:h-52 max-sm:h-36 max-[480px]:h-28 ${
                         playInfoContext.isActive &&
                         playInfoContext.currentQueueType ===  songListType &&
                         playInfoContext.currentPlayIndex === musicIndex ?
@@ -64,7 +64,7 @@ function MusicCard(
                 <PlayPauseMCBtn isHover={isMouseOnCard} musicIndex={musicIndex} listType={songListType}/>
             </div>
 
-            <div className="p-2 text-slate-200 text-center w-[calc(100vw/4-84px)] max-lg:w-[calc(100vw/3-90px)] max-md:w-52 max-sm:w-36 truncate">
+            <div className="p-2 text-slate-200 text-center w-[calc(100vw/4-84px)] max-lg:w-[calc(100vw/3-90px)] max-md:w-52 max-sm:w-36 max-[480px]:w-28 truncate">
                 <a href="www.google.com">
                     {musicData.title}
                 </a>
