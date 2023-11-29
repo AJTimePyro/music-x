@@ -4,11 +4,15 @@ import { MdSkipNext, MdSkipPrevious, MdPlayArrow, MdPause } from "react-icons/md
 import { RxCross2 } from "react-icons/rx";
 import { RiVolumeUpFill, RiVolumeMuteFill } from "react-icons/ri";
 import "../../css/musicPlayer.css";
+import Slider from 'rc-slider';
+import 'rc-slider/assets/index.css';
 
 const MusicPlayer = () => {
     const playInfoContext = useContext(musicPlayContext);
     const [currentTime, setCurrentTime] = useState('00:00');
     const [isMute, setMute] = useState(false);
+    const [duration, setDuration] = useState(0);
+    const [value, setValue] = useState(0);
 
     const currentSongInfo = playInfoContext.musicQueue !== null ? playInfoContext.musicQueue[playInfoContext.currentPlayIndex] : null;
     const imgUrl = currentSongInfo !== null ? currentSongInfo.thumbnail : null;
@@ -37,21 +41,18 @@ const MusicPlayer = () => {
     const musicProgressOnLoad = () => {
         const audioTag = document.getElementById("audioTag");
         if (audioTag) {
-            const progressBar = document.getElementById("progress-bar");
-            progressBar.max = audioTag.duration;
-            progressBar.value = 0;
+            setDuration(audioTag.duration);
+            setValue(0);
             audioTag.play();
         }
     }
-
+    
     setInterval(
         () => {
             const audioTag = document.getElementById("audioTag");
             if (audioTag) {
-                const progressBar = document.getElementById("progress-bar");
                 const cTime = audioTag.currentTime;
-                progressBar.value = cTime;
-
+                setValue(cTime);
                 const minutes = Math.floor(cTime / 60);
                 const remainingSeconds = parseInt(cTime % 60);
                 const mmssFormat = `${String(minutes).padStart(2, '0')}:${String(remainingSeconds).padStart(2, '0')}`;
@@ -60,12 +61,6 @@ const MusicPlayer = () => {
         },
         100
     );
-
-    const progressBarChange = () => {
-        const audioTag = document.getElementById("audioTag");
-        const progressBar = document.getElementById("progress-bar");
-        audioTag.currentTime = progressBar.value;
-    }
 
     const nextBtn = () => {
         playInfoContext.addToCurrentIndex(1);
@@ -101,17 +96,53 @@ const MusicPlayer = () => {
         }
     }
 
+    const progressBarChange = (newValue) => {
+        setValue(newValue);
+        const audioTag = document.getElementById("audioTag");
+        audioTag.currentTime = newValue;
+    };
+
+    const sliderStyles = {
+        handle : {
+            height: 12,
+            width: 12,
+            marginLeft: -4,
+            marginTop: -2,
+            backgroundColor: '#dc2626',
+            border : '#dc2626',
+            boxShadow: 'none',
+            opacity : '1.0',
+            cursor : 'pointer'
+        },
+        track : {
+            backgroundColor: '#dc2626',
+            height: 8,
+            cursor : 'pointer'
+        },
+        rail : {
+            backgroundColor: '#0f172a',
+            height: 8,
+            cursor : 'pointer'
+        }
+    };
+    
+
     return playInfoContext.isActive === true ? (
             <div id="music-player" className="fixed bottom-0 bg-slate-900 w-full text-black flex flex-col slide-up-container">
                 <audio controls id="audioTag" onLoadedMetadata={musicProgressOnLoad} className="hidden" onEnded={songEnd}>
                     <source/>
                 </audio>
 
-                <input
-                    type="range"
-                    className="appearance-none bg-slate-900 w-full h-2 outline-none rounded-lg cursor-pointer focus:outline-none hover:shadow-2xl"
+                <Slider
                     id="progress-bar"
+                    min={0}
+                    max={duration}
+                    step={1}
+                    defaultValue={0}
+                    value={value}
                     onChange={progressBarChange}
+                    styles={sliderStyles}
+                    className="mt-[-5px]"
                 />
 
                 <div className="flex justify-between pl-4 pr-4 max-sm:pl-1 max-sm:pr-1">
