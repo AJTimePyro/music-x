@@ -201,7 +201,7 @@ const MusicPlayer = () => {
                         </div>
                     </div>
 
-                    <div className="text-white flex  items-center gap-2">
+                    <div className="text-white flex items-center gap-2 max-sm:flex-col">
                         <div id="volume-controller" className="flex items-center group gap-4">
                             <Slider
                                 min={0}
