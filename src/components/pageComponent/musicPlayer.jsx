@@ -75,10 +75,9 @@ const MusicPlayer = () => {
         nextBtn();
     }
 
-    const volumeBarChange = () => {
+    const volumeBarChange = (newValue) => {
         const audioTag = document.getElementById("audioTag");
-        const volumeBar = document.getElementById("volume-bar");
-        audioTag.volume = volumeBar.value/100;
+        audioTag.volume = newValue/100;
         if (audioTag.volume === 0) setMute(true);
         else if (isMute) setMute(false);
     }
@@ -102,7 +101,7 @@ const MusicPlayer = () => {
         audioTag.currentTime = newValue;
     };
 
-    const sliderStyles = {
+    const progressBarStyles = {
         handle : {
             height: 12,
             width: 12,
@@ -125,6 +124,30 @@ const MusicPlayer = () => {
             cursor : 'pointer'
         }
     };
+
+    const volumeBarStyles = {
+        handle : {
+            height: 16,
+            width: 16,
+            marginTop: -4,
+            backgroundColor: '#0f172a',
+            border : '2px solid #778da9',
+            borderRadius: '50%',
+            boxShadow: 'none',
+            opacity : '1.0',
+            cursor : 'pointer'
+        },
+        track : {
+            backgroundColor: '#415a77',
+            height: 8,
+            borderRadius : 18
+        },
+        rail : {
+            backgroundColor: '#1b263b',
+            height: 8,
+            borderRadius : 18
+        }
+    };
     
 
     return playInfoContext.isActive === true ? (
@@ -141,7 +164,7 @@ const MusicPlayer = () => {
                     defaultValue={0}
                     value={value}
                     onChange={progressBarChange}
-                    styles={sliderStyles}
+                    styles={progressBarStyles}
                     className="mt-[-5px]"
                 />
 
@@ -179,7 +202,7 @@ const MusicPlayer = () => {
 
                     <div className="text-white flex  items-center gap-2">
                         <div id="volume-controller" className="flex items-center  group gap-4 max-sm:gap-0 max-sm:flex-col max-sm:-rotate-90 max-sm:m-0 max-sm:relative max-sm:left-6">
-                            <input
+                            {/* <input
                                 type="range"
                                 id="volume-bar"
                                 className="appearance-none opacity-0 transition-opacity duration-300 ease-in-out group-hover:opacity-100 w-28 max-md:w-20 max-sm:w-16 max-md:opacity-100 cursor-pointer rounded-lg bg-slate-900 max-sm:appearance-[slider-vertical]"
@@ -187,6 +210,16 @@ const MusicPlayer = () => {
                                 max={100}
                                 defaultValue={100}
                                 onChange={volumeBarChange}
+                            /> */}
+                            <Slider
+                                id="volume-bar"
+                                min={0}
+                                max={100}
+                                step={1}
+                                defaultValue={100}
+                                onChange={volumeBarChange}
+                                styles={volumeBarStyles}
+                                className="opacity-0 transition-opacity duration-300 ease-in-out group-hover:opacity-100 w-28 max-md:w-20 max-sm:w-16 max-md:opacity-100 cursor-pointer rounded-lg max-sm:appearance-[slider-vertical]"
                             />
                             {
                                 isMute ? <RiVolumeMuteFill size={25} className="cursor-pointer max-sm:hidden" onClick={toggleMute}/> :
