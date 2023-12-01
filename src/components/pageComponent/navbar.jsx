@@ -80,7 +80,7 @@ function NavBar() {
             <div className={`transition-[height] duration-300 ease-in ${close_btn ? "max-sm:h-full" : "max-sm:h-0"}`}>
                 <ul
                     className={
-                        `text-slate-400 text-lg md:text-2xl font-ubuntu sm:flex sm:items-center gap-1 md:gap-3 transition-transform duration-300 ease-in-out ${!close_btn ? 'max-sm:translate-x-[100%]' : ''}`
+                        `text-slate-400 text-lg md:text-2xl font-ubuntu sm:flex sm:items-center gap-1 md:gap-3 transition-transform duration-300 ease-in-out ${!close_btn ? 'max-sm:translate-x-[-100%]' : ''}`
                     }>
                     {
                         menu_links.map(
