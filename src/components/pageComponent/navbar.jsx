@@ -53,7 +53,7 @@ function NavBar() {
 
     const handleKeyDown = (event) => {
         if (event.key === 'Enter') searchTrigger();
-    };    
+    };
 
     return (
         <nav className="sm:flex justify-between md:justify-around items-center gap-1 md:gap-3 bg-slate-900 p-4 md:pl-10 md:pr-10 select-none">
@@ -77,10 +77,11 @@ function NavBar() {
             </div>
 
 
-            <div className="">
-                <ul className={
-                    `text-slate-400 text-lg md:text-2xl font-ubuntu sm:flex sm:items-center gap-1 md:gap-3 ${close_btn ? "" : "h-0 hidden"}
-                    `}>
+            <div className={`transition-[height] duration-300 ease-in ${close_btn ? "max-sm:h-full" : "max-sm:h-0"}`}>
+                <ul
+                    className={
+                        `text-slate-400 text-lg md:text-2xl font-ubuntu sm:flex sm:items-center gap-1 md:gap-3 transition-transform duration-300 ease-in-out ${!close_btn ? 'max-sm:translate-x-[100%]' : ''}`
+                    }>
                     {
                         menu_links.map(
                             (links) => (
