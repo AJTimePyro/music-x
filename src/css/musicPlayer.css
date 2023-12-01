@@ -9,7 +9,7 @@
 }
 
 .slide-up-container {
-    animation: slideUp 0.3s ease-in-out;
+  animation: slideUp 0.3s ease-in-out;
 }
 
 @keyframes slideDown {
@@ -22,5 +22,5 @@
 }
 
 .slide-down-container {
-    animation: slideDown 0.3s ease-in-out;
+    animation: slideDown 0.3s ease-in-out forwards;
 }

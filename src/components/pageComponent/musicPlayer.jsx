@@ -33,10 +33,10 @@ const MusicPlayer = () => {
             const musicPlayer = document.getElementById("music-player");
             musicPlayer.classList.remove("slide-up-container");
             musicPlayer.classList.add("slide-down-container");
+            musicPlayer.addEventListener("animationend", closingPlayer);
         } catch (e) {
             return closingPlayer();
         }
-        setTimeout(closingPlayer, 300);
     }
 
     const musicProgressOnLoad = () => {
