@@ -47,6 +47,13 @@ const MusicPlayer = () => {
             audioTag.play();
         }
     }
+
+    const secToMMSS = (time) => {
+        const minutes = Math.floor(time / 60);
+        const remainingSeconds = parseInt(time % 60);
+        const mmssFormat = `${String(minutes).padStart(2, '0')}:${String(remainingSeconds).padStart(2, '0')}`;
+        return mmssFormat;
+    }
     
     setInterval(
         () => {
@@ -54,9 +61,7 @@ const MusicPlayer = () => {
             if (audioTag) {
                 const cTime = audioTag.currentTime;
                 setProgressBarValue(cTime);
-                const minutes = Math.floor(cTime / 60);
-                const remainingSeconds = parseInt(cTime % 60);
-                const mmssFormat = `${String(minutes).padStart(2, '0')}:${String(remainingSeconds).padStart(2, '0')}`;
+                const mmssFormat = secToMMSS(cTime);
                 setCurrentTime(mmssFormat);
             }
         },
@@ -174,7 +179,7 @@ const MusicPlayer = () => {
                         <div className="text-slate-400 m-auto text-sm max-md:text-xs whitespace-nowrap">
                             <span>{ currentTime }</span>
                             <span> / </span>
-                            <span>{ currentSongInfo.duration }</span>
+                            <span>{ secToMMSS(duration) }</span>
                         </div>
                         <div className="flex text-white mt-auto mb-auto gap-1 max-sm:gap-0 items-center">
                             <MdSkipPrevious size={30} className="cursor-pointer max-sm:h-6" onClick={prevBtn}/>
