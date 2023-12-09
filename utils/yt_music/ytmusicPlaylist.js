@@ -8,16 +8,17 @@ const specialPlaylist = {
 class YTMusicPlaylist extends YTMusicBase {
 
     constructor(
-        playlistId,
+        playlistId = null,
         limit = Number.MAX_SAFE_INTEGER
     ) {
         super();
         this.playlistId = playlistId;
         this.limit = limit;
         this.songsList = [];
-
         this.payloadWebClient["browseId"] = "VL" + this.playlistId;
+    }
 
+    async start() {
         let _playlistData = async () => {
             const res = await super.sendpostreq(
                 this.api_url + "youtubei/v1/browse?key=" + this.key,
@@ -132,13 +133,7 @@ class YTMusicPlaylist extends YTMusicBase {
             return [albumName, albumId];
         }
 
-        this.extraction = async () => {
-            await _playlistData();
-        }
-    }
-
-    async start() {
-        await this.extraction();
+        await _playlistData();
     }
 
 }

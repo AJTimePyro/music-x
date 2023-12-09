@@ -3,6 +3,7 @@ const path = require("path");
 const YTMPlaylist = require("../utils/yt_music/ytmusicPlaylist");
 const YTMData = require("../utils/yt_music/ytmusicSongs");
 const YTMSearch = require("../utils/yt_music/ytmusicSearch");
+const YTMArtist = require("../utils/yt_music/ytmusicArtist");
 
 const app = express();
 const port = 5000;
@@ -51,6 +52,14 @@ app.get('/api/search', async (req, res) => {
         }
     );
 });
+
+// Get all songs of Artist
+app.get('/api/artist/:artistID', async (req, res) => {
+    const artistID = req.params.artistID;
+
+    const songsList = await YTMArtist.getYTArtistSongs(artistID);
+    res.json(songsList);
+})
 
 
 // Serving the server
