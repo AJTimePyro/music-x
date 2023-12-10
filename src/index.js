@@ -5,6 +5,7 @@ import { RouterProvider, createBrowserRouter } from 'react-router-dom';
 import HomeBody from './components/pageComponent/homeContent';
 import './css/index.css';
 import SearchComponent from './components/pageComponent/searchContent';
+import ArtistPageComponent from './components/pageComponent/artistContent';
 
 const router = createBrowserRouter(
   [
@@ -18,7 +19,11 @@ const router = createBrowserRouter(
         },
         {
           path : '/search',
-          element : <SearchComponent />
+          element : <SearchComponent/>
+        },
+        {
+          path : '/artist/:artistID',
+          element : <ArtistPageComponent/>
         }
       ]
     }
