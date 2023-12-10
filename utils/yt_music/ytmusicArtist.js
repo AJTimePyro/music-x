@@ -6,6 +6,8 @@ class YTMusicArtist extends YTMusicPlaylist {
         super();
         this.channelID = channelID;
         this.payloadWebClient["browseId"] = this.channelID;
+        this.artistInfo = {};
+        this.artistInfoSongList = {};
     }
 
     // Finding Artist Songs Playlist from unfiltered data
@@ -15,6 +17,21 @@ class YTMusicArtist extends YTMusicPlaylist {
         const navEndBrowseEnd = mSRTR0["navigationEndpoint"]["browseEndpoint"];
         const playlistID = navEndBrowseEnd["browseId"];
         return playlistID;
+    }
+
+    // Parse Artist info
+    _parseArtistInfo() {
+        const mIHR = this.chunkData["header"]["musicImmersiveHeaderRenderer"];
+
+        // Get Artist Name
+        const artistTitle = mIHR["title"];
+        const artistName = artistTitle["runs"][0]["text"];
+        this.artistInfo["artist_name"] = artistName;
+        
+        // Get Artist image
+        const thumbnails = mIHR["thumbnail"]["musicThumbnailRenderer"]["thumbnail"]["thumbnails"];
+        const thumbnail = super.getBestThumbnail(thumbnails)
+        this.artistInfo["thumbnail"] = thumbnail;
     }
 
     async setArtistSongPlaylist() {
@@ -36,7 +53,10 @@ class YTMusicArtist extends YTMusicPlaylist {
 
     async start() {
         await this.setArtistSongPlaylist();
+        this._parseArtistInfo();
         await super.start();
+        this.artistInfoSongList["artistInfo"] = this.artistInfo;
+        this.artistInfoSongList["songsList"] = this.songsList;
     }
 
 }
@@ -44,7 +64,7 @@ class YTMusicArtist extends YTMusicPlaylist {
 async function getYTArtistSongs(artistID) {
     let yTMDataExtract = new YTMusicArtist(artistID);
     await yTMDataExtract.start();
-    return yTMDataExtract.songsList;
+    return yTMDataExtract.artistInfoSongList;
 };
 
 module.exports = {
