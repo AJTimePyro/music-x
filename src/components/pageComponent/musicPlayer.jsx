@@ -16,6 +16,8 @@ const MusicPlayer = () => {
     const [progressBarValue, setProgressBarValue] = useState(0);
     const [volumeVal, setVolumeVal] = useState(100);
 
+    // console.log(playInfoContext.currentQueueType);
+
     const currentSongInfo = playInfoContext.musicQueue !== null ? playInfoContext.musicQueue[playInfoContext.currentPlayIndex] : null;
     const imgUrl = currentSongInfo !== null ? currentSongInfo.thumbnail : null;
 

@@ -80,7 +80,7 @@ class YTMusicArtist extends YTMusicPlaylist {
         await this._getArtistInfo();
         await super.start();
         this.artistInfoSongList["artistInfo"] = this.artistInfo;
-        this.artistInfoSongList["songsList"] = this.songsList;
+        this.artistInfoSongList["song_list"] = this.songsList;
         this.artistInfoSongList["type"] = "artist_" + this.channelID;
     }
 

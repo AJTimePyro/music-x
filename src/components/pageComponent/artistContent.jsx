@@ -18,7 +18,7 @@ function ArtistPageComponent() {
             ).then(
                 data => {
                     setArtistInfoSongs(data);
-                    setSongsList(data["songsList"]);
+                    setSongsList(data["song_list"]);
                     setArtistInfo(data["artistInfo"]);
                 }
             )
