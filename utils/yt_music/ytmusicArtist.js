@@ -51,6 +51,11 @@ class YTMusicArtist extends YTMusicPlaylist {
         const artistTitle = mIHR["title"];
         const artistName = artistTitle["runs"][0]["text"];
         this.artistInfo["artist_name"] = artistName;
+        
+        // Get Artist Description
+        const artistDesc = mIHR["description"];
+        const description = artistDesc["runs"][0]["text"];
+        this.artistInfo["artist_desc"] = description;
     }
 
     async setArtistSongPlaylist() {
