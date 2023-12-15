@@ -54,7 +54,7 @@ class YTMusicArtist extends YTMusicPlaylist {
         
         // Get Artist Description
         const artistDesc = mIHR["description"];
-        const description = artistDesc["runs"][0]["text"];
+        const description = artistDesc ? artistDesc["runs"][0]["text"] : null;
         this.artistInfo["artist_desc"] = description;
     }
 
