@@ -4,20 +4,29 @@ class YTMusicBase {
 
     constructor() {
         
-        this.api_url = "https://music.youtube.com/"
-        this.key = "AIzaSyC9XL3ZjWddXya6X74dJoCTL-WEYFDNX30"
+        this.api_url = "https://music.youtube.com/";
+        this.key = "AIzaSyC9XL3ZjWddXya6X74dJoCTL-WEYFDNX30";
         this.headers = {
             "Content-Type": "application/json",
             "User-Agent": "Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:109.0) Gecko/20100101 Firefox/117.0"
-        }
+        };
         this.payloadWebClient = {
+            "context": {
+                "client": {
+                    "clientName": "WEB",
+                    "clientVersion": "2.20231214.01.00"
+                }
+            },
+            "browseId": "UCMGrQ4dW5CT5bs44tRa94Bw"
+        };
+        this.payloadWebRemixClient = {
             "context": {
                 "client": {
                     "clientName": "WEB_REMIX",
                     "clientVersion": "1.20230911.01.00"
                 }
             }
-        }
+        };
         this.payloadAndroidClient = {
             "context": {
                 "client": {
@@ -26,7 +35,7 @@ class YTMusicBase {
                     "androidSdkVersion": 30
                 }
             }
-        }
+        };
 
         this.musicQuery = {
             "key" : "AIzaSyAO_FJ2SlqU8Q4STEHLGCilw_Y9_11qcW8",

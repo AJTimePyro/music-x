@@ -4,14 +4,14 @@ class YTMusicSearch extends YTMusicBase {
 
     constructor(query) {
         super();
-        this.payloadWebClient["query"] = query;
-        this.payloadWebClient["params"] = "EgWKAQIIAWoQEAoQCRADEAQQBRAREBAQFQ%3D%3D";
+        this.payloadWebRemixClient["query"] = query;
+        this.payloadWebRemixClient["params"] = "EgWKAQIIAWoQEAoQCRADEAQQBRAREBAQFQ%3D%3D";
         this.searchResults = [];
 
         let _searchData = async () => {
             const res = await super.sendpostreq(
                 this.api_url + "youtubei/v1/search?key=" + this.key,
-                this.payloadWebClient
+                this.payloadWebRemixClient
             );
 
             if ("error" in res) {

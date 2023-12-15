@@ -5,7 +5,7 @@ class YTMusicArtist extends YTMusicPlaylist {
     constructor(channelID) {
         super();
         this.channelID = channelID;
-        this.payloadWebClient["browseId"] = this.channelID;
+        this.payloadWebRemixClient["browseId"] = this.channelID;
         this.artistInfo = {};
         this.artistInfoSongList = {};
     }
@@ -19,25 +19,44 @@ class YTMusicArtist extends YTMusicPlaylist {
         return playlistID;
     }
 
+    _parseArtistImg(data) {
+        const avatars = data["header"]["c4TabbedHeaderRenderer"]["avatar"];
+        const thumbnails = avatars["thumbnails"];
+        return this.getBestThumbnail(thumbnails);
+    }
+
+    async _getArtistImg() {
+        this.payloadWebClient["browseId"] = this.channelID;
+        const res = await super.sendpostreq(
+            "https://www.youtube.com/youtubei/v1/browse?key=" + this.key,
+            this.payloadWebClient
+        )
+
+        if ("error" in res) {
+            throw new Error("Unable to return given artist songs...");
+        }
+        else {
+            return await this._parseArtistImg(res);
+        }
+    }
+
     // Parse Artist info
-    _parseArtistInfo() {
+    async _getArtistInfo() {
+        // Get Artist image
+        this.artistInfo["thumbnail"] = await this._getArtistImg();
+
         const mIHR = this.chunkData["header"]["musicImmersiveHeaderRenderer"];
 
         // Get Artist Name
         const artistTitle = mIHR["title"];
         const artistName = artistTitle["runs"][0]["text"];
         this.artistInfo["artist_name"] = artistName;
-        
-        // Get Artist image
-        const thumbnails = mIHR["thumbnail"]["musicThumbnailRenderer"]["thumbnail"]["thumbnails"];
-        const thumbnail = super.getBestThumbnail(thumbnails)
-        this.artistInfo["thumbnail"] = thumbnail;
     }
 
     async setArtistSongPlaylist() {
         const res = await super.sendpostreq(
             this.api_url + "youtubei/v1/browse?key=" + this.key,
-            this.payloadWebClient
+            this.payloadWebRemixClient
         )
 
         if ("error" in res) {
@@ -46,17 +65,18 @@ class YTMusicArtist extends YTMusicPlaylist {
         else {
             this.chunkData = res;
             this.playlistId = this._parsePlaylist();
-            this.payloadWebClient["browseId"] = this.playlistId;
+            this.payloadWebRemixClient["browseId"] = this.playlistId;
         }
 
     }
 
     async start() {
         await this.setArtistSongPlaylist();
-        this._parseArtistInfo();
+        await this._getArtistInfo();
         await super.start();
         this.artistInfoSongList["artistInfo"] = this.artistInfo;
         this.artistInfoSongList["songsList"] = this.songsList;
+        this.artistInfoSongList["type"] = "artist_" + this.channelID;
     }
 
 }

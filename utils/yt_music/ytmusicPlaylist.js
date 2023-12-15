@@ -15,14 +15,14 @@ class YTMusicPlaylist extends YTMusicBase {
         this.playlistId = playlistId;
         this.limit = limit;
         this.songsList = [];
-        this.payloadWebClient["browseId"] = "VL" + this.playlistId;
+        this.payloadWebRemixClient["browseId"] = "VL" + this.playlistId;
     }
 
     async start() {
         let _playlistData = async () => {
             const res = await super.sendpostreq(
                 this.api_url + "youtubei/v1/browse?key=" + this.key,
-                this.payloadWebClient
+                this.payloadWebRemixClient
             )
             if ("error" in res) {
                 throw new Error("Unable to reach to given playlist...");
