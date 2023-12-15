@@ -1,6 +1,7 @@
 import { useContext, useState } from "react";
+import { Link } from 'react-router-dom';
 import musicPlayContext from "../../context/musicPlayInfo/playContext";
-import { MdSkipNext, MdSkipPrevious, MdPlayArrow, MdPause } from "react-icons/md"
+import { MdSkipNext, MdSkipPrevious, MdPlayArrow, MdPause } from "react-icons/md";
 import { RxCross2 } from "react-icons/rx";
 import { RiVolumeUpFill, RiVolumeMuteFill } from "react-icons/ri";
 import "../../css/musicPlayer.css";
@@ -201,7 +202,9 @@ const MusicPlayer = () => {
                                 <span>{ currentSongInfo.title }</span>
                             </div>
                             <div className="underline truncate">
-                                <a href="/" target="_blank">{ currentSongInfo.artist_name }</a>
+                                <Link to={'/artist/' + currentSongInfo.artist_channel_id}>
+                                    { currentSongInfo.artist_name }
+                                </Link>
                             </div>
                         </div>
                     </div>

@@ -86,7 +86,7 @@ function NavBar() {
                         menu_links.map(
                             (links) => (
                                 <li key={links.id}>
-                                    <Link className="block text-center sm:hover:rounded-2xl sm:hover:bg-gray-300 sm:hover:text-slate-700 p-1" href={links.link} draggable="false">{links.name}</Link>
+                                    <Link className="block text-center sm:hover:rounded-2xl sm:hover:bg-gray-300 sm:hover:text-slate-700 p-1" to={links.link} draggable="false">{links.name}</Link>
                                 </li>
                             )
                         )
