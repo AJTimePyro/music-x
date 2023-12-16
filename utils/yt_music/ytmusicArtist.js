@@ -56,6 +56,11 @@ class YTMusicArtist extends YTMusicPlaylist {
         const artistDesc = mIHR["description"];
         const description = artistDesc ? artistDesc["runs"][0]["text"] : null;
         this.artistInfo["artist_desc"] = description;
+
+        // Get Banner
+        const artistBanner = mIHR["thumbnail"]["musicThumbnailRenderer"]["thumbnail"];
+        const artistBanners = artistBanner["thumbnails"];
+        this.artistInfo["artist_banner"] = this.getBestThumbnail(artistBanners);
     }
 
     async setArtistSongPlaylist() {
