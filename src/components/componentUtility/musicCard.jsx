@@ -23,22 +23,25 @@ function MusicCard(
     }
 
     const playMusic = () => {
-        if (playInfoContext.currentQueueType !== songListType) {
-            playInfoContext.changeMusicQueue(musicResInfo.song_list);
-            playInfoContext.setCurrentQueueType(songListType);
-            playInfoContext.setCurrentPlayIndex(musicIndex);
-            playInfoContext.fetchStreamURL(musicData.music_id);
-            return;
-        }
-        
         if (!playInfoContext.isActive) {
             playInfoContext.setIsActive(true);
         }
-        
-        if (playInfoContext.currentPlayIndex !== musicIndex) {
+
+        const playNewSong = () => {
             playInfoContext.fetchStreamURL(musicData.music_id);
             playInfoContext.setCurrentPlayIndex(musicIndex);
             playInfoContext.setPlayPause(true);
+        }
+
+        if (playInfoContext.currentQueueType !== songListType) {
+            playInfoContext.changeMusicQueue(musicResInfo.song_list);
+            playInfoContext.setCurrentQueueType(songListType);
+            playNewSong();
+            return;
+        }
+        
+        if (playInfoContext.currentPlayIndex !== musicIndex) {
+            playNewSong();
             return;
         }
         playInfoContext.togglePlayPause();
