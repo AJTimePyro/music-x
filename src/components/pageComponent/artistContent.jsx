@@ -20,6 +20,11 @@ function ArtistPageComponent() {
                     setArtistInfoSongs(data);
                     setSongsList(data["song_list"]);
                     setArtistInfo(data["artistInfo"]);
+                    const artDesc = document.getElementById("art-desc");
+                    if (artDesc && (artDesc.offsetHeight < artDesc.scrollHeight || artDesc.offsetWidth < artDesc.scrollWidth)) {
+                        const readBtn = document.getElementById("read-more-less");
+                        readBtn.classList.replace("hidden", "visible");
+                    }
                 }
             )
         },
@@ -48,10 +53,16 @@ function ArtistPageComponent() {
                 {
                     artistInfo.artist_desc &&
                     <div className="text-slate-200 font-ubuntu items-center">
-                        <p className={istruncated ? "line-clamp-2" : ''}>
+                        <p id="art-desc" className={istruncated ? "line-clamp-2" : ''}>
                             {artistInfo.artist_desc}
                         </p>
-                        <button onClick={toggleTruncated} className="text-slate-300 font-semibold text-lg">
+                        {/* {
+                            artistInfo.artist_desc.split('\n').length > 2 || window.innerWidth <= 420 &&
+                            <button onClick={toggleTruncated} className="text-slate-300 font-semibold text-lg">
+                                {istruncated ? "Read More" : "Read Less"}
+                            </button>
+                        } */}
+                        <button id="read-more-less" onClick={toggleTruncated} className="text-slate-300 font-semibold text-lg hidden">
                             {istruncated ? "Read More" : "Read Less"}
                         </button>
                     </div>
