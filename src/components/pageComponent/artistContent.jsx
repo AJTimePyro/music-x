@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { useParams } from "react-router-dom";
 import MusicCard from "../componentUtility/musicCard";
 
@@ -8,6 +8,8 @@ function ArtistPageComponent() {
     const [artistInfo, setArtistInfo] = useState({});
     const [songsList, setSongsList] = useState([]);
     const [istruncated, setIstruncated] = useState(true);
+    const artDescRef = useRef(null);
+    const readBtnRef = useRef(null);
 
     useEffect(
         () => {
@@ -20,16 +22,17 @@ function ArtistPageComponent() {
                     setArtistInfoSongs(data);
                     setSongsList(data["song_list"]);
                     setArtistInfo(data["artistInfo"]);
-                    const artDesc = document.getElementById("art-desc");
-                    if (artDesc && (artDesc.offsetHeight < artDesc.scrollHeight || artDesc.offsetWidth < artDesc.scrollWidth)) {
-                        const readBtn = document.getElementById("read-more-less");
-                        readBtn.classList.replace("hidden", "visible");
-                    }
                 }
             )
         },
         [artistID]
     );
+
+    useEffect(() => {
+        if (artDescRef.current && (artDescRef.current.offsetHeight < artDescRef.current.scrollHeight || artDescRef.current.offsetWidth < artDescRef.current.scrollWidth)) {
+            readBtnRef.current.classList.replace("hidden", "visible");
+        }
+    }, [artistInfo]);
 
     const toggleTruncated = () => {
         setIstruncated(!istruncated);
@@ -54,11 +57,11 @@ function ArtistPageComponent() {
                     {
                         artistInfo.artist_desc &&
                         <div className="text-white font-ubuntu items-center">
-                            <p id="art-desc" className={istruncated ? "line-clamp-2" : ''}>
+                            <p ref={artDescRef} className={istruncated ? "line-clamp-2" : ''}>
                                 {artistInfo.artist_desc}
                             </p>
 
-                            <button id="read-more-less" onClick={toggleTruncated} className="text-slate-200 font-semibold text-lg hidden">
+                            <button ref={readBtnRef} onClick={toggleTruncated} className="text-slate-200 font-semibold text-lg hidden">
                                 {istruncated ? "Read More" : "Read Less"}
                             </button>
                         </div>
