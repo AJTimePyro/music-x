@@ -25,6 +25,9 @@ function MusicCard(
         if (playInfoContext.currentQueueType !== songListType) {
             playInfoContext.changeMusicQueue(musicResInfo.song_list);
             playInfoContext.setCurrentQueueType(songListType);
+            playInfoContext.setCurrentPlayIndex(musicIndex);
+            playInfoContext.fetchStreamURL(musicData.music_id);
+            return;
         }
         
         if (!playInfoContext.isActive) {

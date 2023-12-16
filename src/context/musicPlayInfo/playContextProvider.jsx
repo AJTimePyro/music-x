@@ -37,6 +37,7 @@ const MusicPlayState = (props) => {
         ).then(
             data => {
                 const audioTag = document.getElementById("audioTag");
+                audioTag.pause();
                 audioTag.src = data["songURL"];
                 audioTag.load();
                 audioTag.play();
