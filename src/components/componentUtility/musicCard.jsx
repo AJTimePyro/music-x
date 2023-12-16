@@ -1,6 +1,7 @@
 import { useState, useContext } from "react";
 import PlayPauseMCBtn from "./playPauseMCBtn";
 import musicPlayContext from "../../context/musicPlayInfo/playContext";
+import { Link } from "react-router-dom";
 
 function MusicCard(
     {
@@ -68,9 +69,17 @@ function MusicCard(
             </div>
 
             <div className="p-2 text-slate-200 text-center w-[calc(100vw/4-84px)] max-lg:w-[calc(100vw/3-90px)] max-md:w-52 max-sm:w-36 max-[480px]:w-28 truncate">
-                <a href="www.google.com">
-                    {musicData.title}
-                </a>
+                <div>
+                    <span>
+                        {musicData.title}
+                    </span>
+                </div>
+
+                <div className="text-center text-teal-200">
+                    <Link to={"/artist/" + musicData.artist_channel_id}>
+                        {musicData.artist_name}
+                    </Link>
+                </div>
             </div>
         </div>
     )
