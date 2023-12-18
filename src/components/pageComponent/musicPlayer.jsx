@@ -37,8 +37,13 @@ const MusicPlayer = () => {
             musicPlayer.classList.add("slide-down-container");
             musicPlayer.addEventListener("animationend", closingPlayer);
         } catch (e) {
-            return closingPlayer();
+            closingPlayer();
         }
+
+        // Reverting title and favicon to original
+        document.title = "Music X";
+        const favicon = document.getElementById('favicon');
+        favicon.href = "favicon.ico";
     };
 
     const musicProgressOnLoad = () => {

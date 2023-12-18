@@ -23,6 +23,10 @@ function MusicCard(
     }
 
     const playMusic = () => {
+        document.title = `${musicData.title} - ${musicData.artist_name}`;
+        const favicon = document.getElementById('favicon');
+        favicon.href = musicData.thumbnail;
+
         if (!playInfoContext.isActive) {
             playInfoContext.setIsActive(true);
         }
