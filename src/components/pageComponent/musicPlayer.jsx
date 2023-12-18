@@ -1,4 +1,4 @@
-import { useContext, useState, useRef } from "react";
+import { useContext, useState, useRef, useEffect } from "react";
 import { Link } from 'react-router-dom';
 import musicPlayContext from "../../context/musicPlayInfo/playContext";
 import { MdSkipNext, MdSkipPrevious, MdPlayArrow, MdPause } from "react-icons/md";
@@ -14,7 +14,7 @@ const MusicPlayer = () => {
     const [isMute, setMute] = useState(false);
     const [duration, setDuration] = useState(0);
     const [progressBarValue, setProgressBarValue] = useState(0);
-    const [volumeVal, setVolumeVal] = useState(100);
+    const [volumeVal, setVolumeVal] = useState(50);
     const audioRef = useRef(null);
 
     const currentSongInfo = playInfoContext.musicQueue !== null ? playInfoContext.musicQueue[playInfoContext.currentPlayIndex] : null;
@@ -45,6 +45,7 @@ const MusicPlayer = () => {
         if (audioRef.current) {
             setDuration(audioRef.current.duration);
             setProgressBarValue(0);
+            audioRef.current.volume = volumeVal/100;
             audioRef.current.play();
         }
     };
@@ -83,6 +84,7 @@ const MusicPlayer = () => {
             if (audioRef.current.volume === 0) setMute(true);
             else if (isMute) setMute(false);
         }
+        window.localStorage.setItem("DEFAULT_VOL", JSON.stringify(newValue));
     };
 
     const toggleMute = () => {
@@ -151,6 +153,15 @@ const MusicPlayer = () => {
             borderRadius: 18,
         },
     };
+
+    useEffect(
+        () => {
+            const volumeVal = window.localStorage.getItem("DEFAULT_VOL");
+            if (volumeVal === null) window.localStorage.setItem("DEFAULT_VOL", JSON.stringify(50));
+            else volumeBarChange(JSON.parse(volumeVal));
+        },
+        []
+    );
 
     return (
         playInfoContext.isActive &&
