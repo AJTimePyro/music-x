@@ -41,6 +41,10 @@ const MusicPlayState = (props) => {
                 audioTag.src = data["songURL"];
                 audioTag.load();
                 audioTag.play();
+
+                document.title = `${data["title"]} - Music X`;
+                const favicon = document.getElementById('favicon');
+                favicon.href = data["thumbnail"];
             }
         )
     }

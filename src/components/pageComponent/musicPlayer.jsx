@@ -48,6 +48,7 @@ const MusicPlayer = () => {
 
     const musicProgressOnLoad = () => {
         if (audioRef.current) {
+            audioRef.current.title = "YO";
             setDuration(audioRef.current.duration);
             setProgressBarValue(0);
             audioRef.current.volume = volumeVal/100;
@@ -81,6 +82,14 @@ const MusicPlayer = () => {
         setCurrentTime("00:00");
         nextBtn();
     };
+
+    const pauseSong = () => {
+        playInfoContext.setPlayPause(false);
+    }
+
+    const playSong = () => {
+        playInfoContext.setPlayPause(true);
+    }
 
     const volumeBarChange = (newValue) => {
         setVolumeVal(newValue);
@@ -164,16 +173,13 @@ const MusicPlayer = () => {
             const volumeVal = window.localStorage.getItem("DEFAULT_VOL");
             if (volumeVal === null) window.localStorage.setItem("DEFAULT_VOL", JSON.stringify(50));
             else volumeBarChange(JSON.parse(volumeVal));
-        },
-        []
+        }
     );
 
     return (
         playInfoContext.isActive &&
         <div id="music-player" className="fixed bottom-0 bg-slate-900 w-full text-black flex flex-col slide-up-container">
-            <audio controls ref={audioRef} id="audioTag" onLoadedMetadata={musicProgressOnLoad} className="hidden" onEnded={songEnd} onTimeUpdate={handleTimeUpdate}>
-                <source />
-            </audio>
+            <audio controls ref={audioRef} id="audioTag" onLoadedMetadata={musicProgressOnLoad} className="hidden" artist="Artist Name" onEnded={songEnd} onTimeUpdate={handleTimeUpdate} onPause={pauseSong} onPlay={playSong}></audio>
 
             <Slider
                 id="progress-bar"
