@@ -1,7 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import App from './App';
-import { RouterProvider, createBrowserRouter } from 'react-router-dom';
+import { RouterProvider, createBrowserRouter, Navigate } from 'react-router-dom';
 import HomeBody from './components/pageComponent/homeContent';
 import './css/index.css';
 import SearchComponent from './components/pageComponent/searchContent';
@@ -22,11 +22,24 @@ const router = createBrowserRouter(
           element : <SearchComponent/>
         },
         {
-          path : '/artist/:artistID',
-          element : <ArtistPageComponent/>
+          path : '/artist',
+          children : [
+            {
+              path : '',
+              element : <Navigate to="/"/>
+            },
+            {
+              path : ':artistID',
+              element : <ArtistPageComponent/>
+            }
+          ]
+        },
+        {
+          path : '*',
+          element : <Navigate to="/"/>
         }
       ]
-    }
+    },
   ]
 )
 

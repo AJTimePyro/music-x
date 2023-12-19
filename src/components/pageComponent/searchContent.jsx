@@ -1,8 +1,9 @@
 import { useEffect, useState } from "react";
-import { useSearchParams } from "react-router-dom";
+import { useSearchParams, useNavigate } from "react-router-dom";
 import MusicCard from "../componentUtility/musicCard";
 
 function SearchComponent() {
+    const navigate = useNavigate();
     const [searchParams] = useSearchParams();
 
     const query = searchParams.get("query");
@@ -12,16 +13,19 @@ function SearchComponent() {
 
     useEffect(
         () => {
-            fetch(
-                "api/search?query=" + query
-            ).then(
-                response => response.json()
-            ).then(
-                data => {
-                    setSearchInfo(data);
-                    setSearchResult(data.song_list);
-                }
-            )
+            if (query) {
+                fetch(
+                    "api/search?query=" + query
+                ).then(
+                    response => response.json()
+                ).then(
+                    data => {
+                        setSearchInfo(data);
+                        setSearchResult(data.song_list);
+                    }
+                )
+            }
+            else navigate("/");
         },
         [query]
     )
