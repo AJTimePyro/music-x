@@ -5,7 +5,7 @@ import { useEffect, useState } from "react";
 function MusicScrollX(scrollXData) {
 
     const [songsInfo, setSongsInfo] = useState({});
-    const [songsList, setSongsList] = useState([{}]);
+    const [songsList, setSongsList] = useState([{}, {}, {}, {}]);
 
     useEffect(
         () => {

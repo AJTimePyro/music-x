@@ -8,7 +8,7 @@ function SearchComponent() {
     const query = searchParams.get("query");
 
     const [searchInfo, setSearchInfo] = useState({});
-    const [searchResult, setSearchResult] = useState([{}]);
+    const [searchResult, setSearchResult] = useState([{}, {}, {}, {}, {}, {}, {}, {}]);
 
     useEffect(
         () => {
