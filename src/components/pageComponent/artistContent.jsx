@@ -6,7 +6,7 @@ function ArtistPageComponent() {
     const { artistID } = useParams();
     const [artistInfoSongs, setArtistInfoSongs] = useState({});
     const [artistInfo, setArtistInfo] = useState({});
-    const [songsList, setSongsList] = useState([]);
+    const [songsList, setSongsList] = useState([{}, {}, {}, {}, {}, {}, {}, {}]);
     const [istruncated, setIstruncated] = useState(true);
     const artDescRef = useRef(null);
     const readBtnRef = useRef(null);

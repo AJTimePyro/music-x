@@ -39,7 +39,7 @@ const router = createBrowserRouter(
           element : <Navigate to="/"/>
         }
       ]
-    },
+    }
   ]
 )
 
