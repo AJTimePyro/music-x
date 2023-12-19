@@ -27,7 +27,7 @@ function SearchComponent() {
     )
 
     return (
-        <main className="bg-slate-800 flex flex-col">
+        <main className="bg-slate-800 flex flex-col pb-16">
             <div className="flex w-full h-full flex-wrap justify-center mt-4">
                 {
                     searchResult.map(

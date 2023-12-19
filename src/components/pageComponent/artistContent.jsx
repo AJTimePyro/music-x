@@ -39,7 +39,7 @@ function ArtistPageComponent() {
     }
 
     return (
-        <main className="bg-slate-800 flex flex-col">
+        <main className="bg-slate-800 flex flex-col pb-12">
             <div className="pt-4 relative">
                 <div className="z-10 flex mr-12 ml-12 max-md:mr-8 max-md:ml-8 gap-4 max-md:gap-2 max-sm:gap-0 items-center max-[420px]:flex-col">
                     <div className={`flex-shrink-0 ${artistInfo.artist_desc ? '' : "flex"} max-[420px]:flex items-center`}>
