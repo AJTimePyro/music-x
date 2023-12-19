@@ -96,20 +96,14 @@ const MusicPlayer = () => {
         if (audioRef.current) {
             audioRef.current.volume = newValue / 100;
             if (audioRef.current.volume === 0) setMute(true);
-            else if (isMute) setMute(false);
         }
         window.localStorage.setItem("DEFAULT_VOL", JSON.stringify(newValue));
     };
 
     const toggleMute = () => {
         if (audioRef.current) {
-            if (audioRef.current.volume) {
-                audioRef.current.volume = 0;
-                setMute(true);
-            } else {
-                audioRef.current.volume = volumeVal / 100;
-                if (isMute) setMute(false);
-            }
+            audioRef.current.muted = !isMute;
+            setMute(!isMute);
         }
     };
 
