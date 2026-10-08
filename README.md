@@ -1,6 +1,8 @@
 # Music X
 ![](https://github-readme-stats.vercel.app/api/pin?username=AJTimePyro&show_icons=true&theme=dracula&hide_border=true&repo=music-x)
 
+> **Note:** YouTube had updated its security, so Music X is unable to play music.
+
 * 🗒️:[Description](#Description)
 * 📝:[Requirements](#Requirements)
 * 📩:[Installation](#Installation)

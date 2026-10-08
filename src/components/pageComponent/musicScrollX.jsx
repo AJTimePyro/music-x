@@ -18,7 +18,7 @@ function MusicScrollX(scrollXData) {
                 }
             )
         },
-        []
+        [scrollXData.url]
     )
 
     const slide = (direction) => {

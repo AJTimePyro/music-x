@@ -27,7 +27,7 @@ function SearchComponent() {
             }
             else navigate("/");
         },
-        [query]
+        [query, navigate]
     )
 
     return (
