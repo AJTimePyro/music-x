@@ -34,7 +34,7 @@ class YTMusicPlaylist extends YTMusicBase {
         }
 
         let _parseData = () => {
-            const trueContent = this.chunkData["contents"]["singleColumnBrowseResultsRenderer"]["tabs"][0]["tabRenderer"]["content"]["sectionListRenderer"]["contents"][0]["musicPlaylistShelfRenderer"]["contents"];
+            const trueContent = this.chunkData["contents"]["twoColumnBrowseResultsRenderer"]["secondaryContents"]["sectionListRenderer"]["contents"][0]["musicPlaylistShelfRenderer"]["contents"];
             
             for (const index in trueContent) {
                 if (index >= this.limit) break;
